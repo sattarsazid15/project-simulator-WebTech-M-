@@ -1,0 +1,15 @@
+body {
+    font-family: Arial;
+    text-align: center;
+}
+
+.roles {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.role {
+    padding: 20px;
+    border: 1px solid black;
+}
