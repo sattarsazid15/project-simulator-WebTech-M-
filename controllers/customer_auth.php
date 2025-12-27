@@ -21,7 +21,7 @@ if ($_POST['action'] == "login") {
         $_SESSION['customer']['password'] == $_POST['password']
     ) {
         $_SESSION['logged_in'] = true;
-        header("Location: ../views/customer_menudemophp");
+        header("Location: ../views/customer_menudemo.php");
         exit();
     } else {
         echo "Invalid Login!";

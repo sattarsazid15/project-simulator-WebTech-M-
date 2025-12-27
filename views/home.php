@@ -8,13 +8,17 @@
 <h2>Select Your Role</h2>
 
 <div class="roles">
-    <div class="role">Admin</div>
+    <div class="role">
+        <a href="admin_login.php">Admin</a>
+    </div>
 
     <div class="role">
         <a href="customer_login.php">Customer</a>
     </div>
 
-    <div class="role">Technician</div>
+    <div class="role">
+        <a href="technician_signup.php">Technician</a>
+    </div>
 </div>
 
 </body>
