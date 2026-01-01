@@ -1,31 +1,44 @@
-<?php 
-    session_start(); 
-?>
+<?php session_start(); ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Customer Sign Up</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style1.css">
+    <script src="../assets/js/validation.js"></script>
 </head>
 <body>
 
-<h2>Customer Sign Up</h2>
+<div class="form-container">
+    <h2>Customer Sign Up</h2>
 
-<form method="post" action="../controllers/customer_auth.php">
-    <input type="hidden" name="action" value="signup">
+    <form method="post" action="../controllers/customer_auth.php" onsubmit="return validateSignup();">
 
-    Name:
-    <input type="text" name="name" required><br><br>
+        <input type="hidden" name="action" value="signup">
 
-    Email:
-    <input type="email" name="email" required><br><br>
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" name="name" id="name">
+        </div>
 
-    Password:
-    <input type="password" name="password" required><br><br>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" name="email" id="email">
+        </div>
 
-    <button type="submit">Sign Up</button>
-</form>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" id="password">
+        </div>
+
+        <button type="submit">Sign Up</button>
+    </form>
+
+    <div class="form-footer">
+        Already have an account?
+        <a href="customer_login.php">Login</a>
+    </div>
+</div>
 
 </body>
 </html>

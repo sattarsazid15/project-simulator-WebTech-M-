@@ -1,32 +1,38 @@
-<?php 
-    session_start(); 
-?>
+<?php session_start(); ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Customer Login</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style1.css">
+    <script src="../assets/js/validation.js"></script>
 </head>
 <body>
 
-<h2>Customer Login</h2>
+<div class="form-container">
+    <h2>Customer Login</h2>
 
-<form method="post" action="../controllers/customer_auth.php">
-    <input type="hidden" name="action" value="login">
+    <form method="post" action="../controllers/customer_auth.php" onsubmit="return validateLogin();">
 
-    Email:
-    <input type="email" name="email" required><br><br>
+        <input type="hidden" name="action" value="login">
 
-    Password:
-    <input type="password" name="password" required><br><br>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" name="email" id="login_email">
+        </div>
 
-    <button type="submit">Login</button>
-</form>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" id="login_password">
+        </div>
 
-<p>
-    New user? <a href="customer_signup.php">Sign Up</a>
-</p>
+        <button type="submit">Login</button>
+    </form>
+
+    <div class="form-footer">
+        New user? <a href="customer_signup.php">Sign Up</a>
+    </div>
+</div>
 
 </body>
 </html>
