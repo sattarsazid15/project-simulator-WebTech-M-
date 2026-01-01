@@ -27,3 +27,30 @@ function validateLogin() {
 
     return true;
 }
+
+function validateForgotPassword() {
+    var email = document.getElementById("forgot_email").value;
+    if (email === "") {
+        alert("Email is required");
+        return false;
+    }
+    return true;
+}
+
+function validateResetPassword() {
+    var pass = document.getElementById("new_password").value;
+    var confirm = document.getElementById("confirm_password").value;
+
+    if (pass === "" || confirm === "") {
+        alert("All fields are required");
+        return false;
+    }
+
+    if (pass !== confirm) {
+        alert("Passwords do not match");
+        return false;
+    }
+
+    return true;
+}
+

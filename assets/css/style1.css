@@ -17,14 +17,14 @@ body {
     background-color: #ffffff;
     width: 100%;
     max-width: 420px;
-    padding: 25px;
+    padding: 30px;
     border-radius: 8px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
 }
 
 .form-container h2 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     color: #333;
 }
 
@@ -34,8 +34,9 @@ body {
 
 .form-group label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
     color: #444;
+    font-size: 14px;
 }
 
 .form-group input {
@@ -60,6 +61,7 @@ button {
     font-size: 16px;
     border-radius: 4px;
     cursor: pointer;
+    margin-top: 10px;
 }
 
 button:hover {
