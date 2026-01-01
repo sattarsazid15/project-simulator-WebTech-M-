@@ -1,23 +1,46 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <title>Add Mobile Product</title>
+    <link rel="stylesheet" href="../assets/css/product_form.css">
+</head>
+<body>
+</head>
 <body>
 
-<h2>Add Mobile Product</h2>
+<div class="form-container">
+    <h2>Add Mobile Product</h2>
 
-<form method="post" action="../controllers/product_controller.php" enctype="multipart/form-data">
-    <input type="hidden" name="type" value="mobile">
+    <form method="post" action="../controllers/product_controller.php" enctype="multipart/form-data">
+        <input type="hidden" name="type" value="mobile">
 
-    Product Image: <input type="file" name="image"><br><br>
-    Price: <input type="text" name="price"><br><br>
-    Model: <input type="text" name="model"><br><br>
-    Display Size: <input type="text" name="display"><br><br>
-    Camera: <input type="text" name="camera"><br><br>
-    Battery: <input type="text" name="battery"><br><br>
-    Processor: <input type="text" name="processor"><br><br>
-    RAM: <input type="text" name="ram"><br><br>
+        <label>Product Image</label>
+        <input type="file" name="image">
 
-    <button type="submit">Add Mobile</button>
-</form>
+        <label>Price</label>
+        <input type="text" name="price">
+
+        <label>Model</label>
+        <input type="text" name="model">
+
+        <label>Display Size</label>
+        <input type="text" name="display">
+
+        <label>Camera</label>
+        <input type="text" name="camera">
+
+        <label>Battery</label>
+        <input type="text" name="battery">
+
+        <label>Processor</label>
+        <input type="text" name="processor">
+
+        <label>RAM</label>
+        <input type="text" name="ram">
+
+        <button type="submit">Add Mobile</button>
+    </form>
+</div>
 
 </body>
 </html>
