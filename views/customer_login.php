@@ -31,6 +31,7 @@
 
     <div class="form-footer">
         New user? <a href="customer_signup.php">Sign Up</a>
+        or, <a href="forgot_password.php">Forgot Password?</a>
     </div>
 </div>
 
