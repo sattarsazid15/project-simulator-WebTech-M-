@@ -1,19 +1,33 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <title>Add Gadget Product</title>
+
+
+    <link rel="stylesheet" href="../assets/css/product_form.css">
 <body>
 
-<h2>Add Gadget</h2>
+<div class="form-container">
+    <h2>Add Gadget Product</h2>
 
-<form method="post" action="../controllers/product_controller.php" enctype="multipart/form-data">
-    <input type="hidden" name="type" value="gadget">
+    <form method="post" action="../controllers/product_controller.php" enctype="multipart/form-data">
+        <input type="hidden" name="type" value="gadget">
 
-    Product Image: <input type="file" name="image"><br><br>
-    Product Name: <input type="text" name="name"><br><br>
-    Price: <input type="text" name="price"><br><br>
-    Details: <input type="text" name="details"><br><br>
+        <label>Product Image</label>
+        <input type="file" name="image">
 
-    <button type="submit">Add Gadget</button>
-</form>
+        <label>Price</label>
+        <input type="text" name="price">
+
+        <label>Brand</label>
+        <input type="text" name="brand">
+
+        <label>Description</label>
+        <input type="text" name="description">
+
+        <button type="submit">Add Gadget</button>
+    </form>
+</div>
 
 </body>
 </html>

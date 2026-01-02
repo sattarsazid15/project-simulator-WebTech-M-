@@ -3,7 +3,7 @@
 <html>
 <body>
 
-<h2>Delete Product</h2>
+<h2>Manage Products</h2>
 
 <table border="1">
 <tr>
@@ -18,7 +18,11 @@ if (!empty($_SESSION['products'])) {
         echo "<tr>";
         echo "<td><img src='../assets/uploads/".$product['image']."' width='80'></td>";
         echo "<td>".$product['type']."</td>";
-        echo "<td><a href='../controllers/product_controller.php?delete=$index'>Delete</a></td>";
+        echo "<td>
+            <a href='../controllers/product_controller.php?edit=$index'>Edit</a>
+            |
+            <a href='../controllers/product_controller.php?delete=$index'>Delete</a>
+        </td>";
         echo "</tr>";
     }
 }
