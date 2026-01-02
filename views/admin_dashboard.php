@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('../models/technician_model.php');
+require_once('../models/technicianModel.php');
 
 if(!isset($_SESSION['admin'])){
     header("Location: admin_login.php");
