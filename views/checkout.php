@@ -16,7 +16,7 @@
 <body>
     <center>
         <h1>Checkout</h1>
-        <a href="home.php">Back to Home</a> | 
+        <a href="customer_menudemo.php">Back to Home</a> | 
         <a href="../controllers/logout.php">Logout</a>
         <br><br>
 
