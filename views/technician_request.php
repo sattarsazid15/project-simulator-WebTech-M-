@@ -7,8 +7,7 @@ if(!isset($_SESSION['admin'])){
 }
 ?>
 
-<h2>Admin Dashboard</h2>
-<!-- h3>Pending Technicians</h3>
+<h3>Pending Technicians</h3>
 
 <table border="1" cellpadding="10">
 <tr>
@@ -18,7 +17,7 @@ if(!isset($_SESSION['admin'])){
     <th>Action</th>
 </tr>
 
-?php
+<?php
 $result = getPendingTechnicians();
 if(mysqli_num_rows($result) > 0){
     while($tech = mysqli_fetch_assoc($result)){
@@ -36,9 +35,4 @@ if(mysqli_num_rows($result) > 0){
     echo "<tr><td colspan='4'>No pending technicians</td></tr>";
 }
 ?>
-</table -->
-
-<br>
-<a href="../views/technician_request.php">Technician Request</a>
-<br>
-<a href="../controllers/logout.php">Logout</a>
+</table>

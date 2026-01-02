@@ -8,4 +8,5 @@ if (!isset($_SESSION['technician'])) {
 <h2>Welcome Technician</h2>
 <p>You are approved and logged in.</p>
 
+<a href="technician_edit_profile.php">Edit Profile</a><br>
 <a href="../controllers/logout.php">Logout</a>

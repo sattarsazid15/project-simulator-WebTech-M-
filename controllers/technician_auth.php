@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('../models/technician_model.php');
+require_once('../models/technicianModel.php');
 
 $tech = [
     'email' => $_POST['email'],

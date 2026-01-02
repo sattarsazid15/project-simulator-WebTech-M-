@@ -45,4 +45,36 @@ function updatePassword($email, $password){
     $sql = "UPDATE users SET password='$password' WHERE email='$email'";
     return mysqli_query($con, $sql);
 }
+
+function getUserById($id){
+    $con = getConnection();
+    $sql = "SELECT * FROM users WHERE id=$id";
+    $result = mysqli_query($con, $sql);
+    return mysqli_fetch_assoc($result);
+}
+
+function updateProfile($id, $username, $email){
+    $con = getConnection();
+    $sql = "UPDATE users 
+            SET username='$username', email='$email'
+            WHERE id=$id";
+    return mysqli_query($con, $sql);
+}
+
+function changePassword($id, $oldPass, $newPass){
+    $con = getConnection();
+
+    $check = "SELECT * FROM users 
+              WHERE id=$id AND password='$oldPass'";
+    $result = mysqli_query($con, $check);
+
+    if(mysqli_num_rows($result) == 1){
+        $sql = "UPDATE users 
+                SET password='$newPass'
+                WHERE id=$id";
+        return mysqli_query($con, $sql);
+    }
+    return false;
+}
+
 ?>

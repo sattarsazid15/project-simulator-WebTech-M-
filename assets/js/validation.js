@@ -81,4 +81,59 @@ function validateTechSignup() {
     return true;
 }
 
+function validateProfile(){
+    let username = document.querySelector("input[name='username']").value;
+    let email = document.querySelector("input[name='email']").value;
+
+    if(username === "" || email === ""){
+        alert("All fields are required");
+        return false;
+    }
+    return true;
+}
+
+function validatePassword(){
+    let oldP = document.querySelector("input[name='old_password']").value;
+    let newP = document.querySelector("input[name='new_password']").value;
+    let conP = document.querySelector("input[name='confirm_password']").value;
+
+    if(oldP === "" || newP === "" || conP === ""){
+        alert("All password fields are required");
+        return false;
+    }
+
+    if(newP !== conP){
+        alert("New password and confirm password do not match");
+        return false;
+    }
+    return true;
+}
+
+function validateTechProfile(){
+    var email = document.querySelector("input[name='email']").value;
+    if(email === ""){
+        alert("Email cannot be empty");
+        return false;
+    }
+    return true;
+}
+
+function validateTechPassword(){
+    var oldp = document.querySelector("input[name='old_password']").value;
+    var newp = document.querySelector("input[name='new_password']").value;
+    var conf = document.querySelector("input[name='confirm_password']").value;
+
+    if(oldp === "" || newp === "" || conf === ""){
+        alert("All password fields are required");
+        return false;
+    }
+    if(newp !== conf){
+        alert("Passwords do not match");
+        return false;
+    }
+    return true;
+}
+
+
+
 

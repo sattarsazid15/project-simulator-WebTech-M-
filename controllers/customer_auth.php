@@ -11,6 +11,7 @@ if($_POST['action'] == "signup"){
 
     if(addUser($user)){
         header("Location: ../views/customer_login.php");
+        exit;
     } else {
         echo "Signup failed";
     }
@@ -23,10 +24,18 @@ if($_POST['action'] == "login"){
     ];
 
     if(loginUser($user)){
-        $_SESSION['customer_logged_in'] = true;
+
         $userData = getUserByEmail($user['email']);
-        $_SESSION['customer_name'] = $userData['username'];
+
+        $_SESSION['customer'] = [
+            'id' => $userData['id'],
+            'username' => $userData['username'],
+            'email' => $userData['email']
+        ];
+
         header("Location: ../views/customer_menudemo.php");
+        exit;
+
     } else {
         echo "Invalid Login";
     }

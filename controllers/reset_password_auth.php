@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('../models/user_model.php');
+require_once('../models/userModel.php');
 
 if(!isset($_SESSION['reset_email'])){
     header("Location: ../views/customer_login.php");
