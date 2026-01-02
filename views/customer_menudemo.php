@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(!isset($_SESSION['customer_logged_in'])){
+if(!isset($_SESSION['customer'])){
     header("Location: customer_login.php");
     exit();
 }
@@ -15,7 +15,9 @@ if(!isset($_SESSION['customer_logged_in'])){
 <body>
 
 <h2>Welcome Customer</h2>
-<p>You are logged in as <?php echo $_SESSION['customer_name']; ?></p>
+<p>You are logged in as <?= $_SESSION['customer']['username']; ?></p>
+
+<a href="customer_edit_profile.php">Edit Profile</a><br>
 
 <a href="customer_login.php">Logout</a>
 

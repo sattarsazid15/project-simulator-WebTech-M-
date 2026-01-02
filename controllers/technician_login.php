@@ -1,13 +1,19 @@
 <?php
 session_start();
-require_once('../models/technician_model.php');
+require_once('../models/technicianModel.php');
 
 $email = $_POST['email'];
 $password = $_POST['password'];
 
 if(technicianLogin($email, $password)){
-    $_SESSION['technician'] = $email;
+
+    $tech = getTechnicianByEmail($email);
+
+    $_SESSION['technician_logged_in'] = true;
+    $_SESSION['technician'] = $tech;
+
     header("Location: ../views/technician_dashboard.php");
-}else{
-    echo "Login failed or not approved yet";
+    exit;
 }
+
+echo "Invalid credentials or not approved";

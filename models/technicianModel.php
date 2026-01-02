@@ -47,3 +47,37 @@ function technicianLogin($email, $password){
     $result = mysqli_query($con, $sql);
     return mysqli_num_rows($result) == 1;
 }
+
+function getTechnicianById($id){
+    $con = getConnection();
+    $sql = "SELECT * FROM technicians WHERE id=$id";
+    $result = mysqli_query($con, $sql);
+    return mysqli_fetch_assoc($result);
+}
+
+function updateTechnicianEmail($id, $email){
+    $con = getConnection();
+    $sql = "UPDATE technicians SET email='$email' WHERE id=$id";
+    return mysqli_query($con, $sql);
+}
+
+function changeTechnicianPassword($id, $old, $new){
+    $con = getConnection();
+    $check = "SELECT * FROM technicians 
+              WHERE id=$id AND password='$old'";
+    $res = mysqli_query($con, $check);
+
+    if(mysqli_num_rows($res) == 1){
+        $sql = "UPDATE technicians SET password='$new' WHERE id=$id";
+        return mysqli_query($con, $sql);
+    }
+    return false;
+}
+
+function getTechnicianByEmail($email){
+    $con = getConnection();
+    $sql = "SELECT * FROM technicians WHERE email='$email' LIMIT 1";
+    $result = mysqli_query($con, $sql);
+    return mysqli_fetch_assoc($result);
+}
+
