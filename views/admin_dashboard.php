@@ -1,25 +1,42 @@
 <?php
 session_start();
-if (!isset($_SESSION['admin'])) {
+require_once('../models/technician_model.php');
+
+if(!isset($_SESSION['admin'])){
     header("Location: admin_login.php");
 }
 ?>
 
 <h2>Admin Dashboard</h2>
-
 <h3>Pending Technicians</h3>
 
-<?php
-if (!empty($_SESSION['pending_technicians'])) {
-    foreach ($_SESSION['pending_technicians'] as $index => $tech) {
-        echo $tech['username'];
-        echo " <a href='../controllers/admin_auth.php?approve=$index'>Approve</a><br>";
-    }
-} else {
-    echo "No pending requests";
-}
+<table border="1" cellpadding="10">
+<tr>
+    <th>Email</th>
+    <th>Username</th>
+    <th>Specialist</th>
+    <th>Action</th>
+</tr>
 
+<?php
+$result = getPendingTechnicians();
+if(mysqli_num_rows($result) > 0){
+    while($tech = mysqli_fetch_assoc($result)){
+        echo "<tr>
+            <td>{$tech['email']}</td>
+            <td>{$tech['username']}</td>
+            <td>{$tech['specialization']}</td>
+            <td>
+                <a href='../controllers/admin_auth.php?approve={$tech['id']}'>Approve</a> |
+                <a href='../controllers/admin_auth.php?decline={$tech['id']}'>Decline</a>
+            </td>
+        </tr>";
+    }
+}else{
+    echo "<tr><td colspan='4'>No pending technicians</td></tr>";
+}
 ?>
+</table>
 
 <br>
 <a href="../controllers/logout.php">Logout</a>

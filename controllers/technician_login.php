@@ -1,16 +1,13 @@
 <?php
 session_start();
+require_once('../models/technician_model.php');
 
-if (!empty($_SESSION['approved_technicians'])) {
-    foreach ($_SESSION['approved_technicians'] as $tech) {
-        if ($_POST['username'] == $tech['username'] &&
-            $_POST['password'] == $tech['password']) {
+$email = $_POST['email'];
+$password = $_POST['password'];
 
-            $_SESSION['technician'] = $tech;
-            header("Location: ../views/technician_dashboard.php");
-            exit;
-        }
-    }
+if(technicianLogin($email, $password)){
+    $_SESSION['technician'] = $email;
+    header("Location: ../views/technician_dashboard.php");
+}else{
+    echo "Login failed or not approved yet";
 }
-
-echo "Not approved or invalid credentials.";

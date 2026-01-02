@@ -54,3 +54,31 @@ function validateResetPassword() {
     return true;
 }
 
+function validateTechLogin() {
+    const username = document.getElementById("login_username").value;
+    const password = document.getElementById("login_password").value;
+
+    if (username === "" || password === "") {
+        alert("All fields are required");
+        return false;
+    }
+    return true;
+}
+
+function validateTechSignup() {
+    const fields = [
+        "email", "username", "password",
+        "specialist", "experience", "dob", "shop"
+    ];
+
+    for (let i = 0; i < fields.length; i++) {
+        if (document.getElementById(fields[i]).value === "") {
+            alert("Please fill all fields");
+            return false;
+        }
+    }
+
+    return true;
+}
+
+
