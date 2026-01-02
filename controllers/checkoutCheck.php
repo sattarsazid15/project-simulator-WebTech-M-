@@ -1,5 +1,6 @@
 <?php 
     session_start();
+    require_once('../models/orderModel.php');
 
     if(isset($_REQUEST['submit'])){
 
@@ -13,36 +14,34 @@
         } else {
             
             $total = 0;
-            $items = [];
-            
             if(isset($_SESSION['cart'])){
-                $items = $_SESSION['cart'];
-                foreach($items as $item){
+                foreach($_SESSION['cart'] as $item){
                     $total += $item['price'] * $item['qty'];
                 }
             }
 
             $order = [
-                'order_id' => rand(1000, 9999),
                 'customer_name' => $fullname,
                 'contact' => $contact,
                 'address' => $address,
-                'payment_method' => $payment_method,
-                'items' => $items,
-                'total_amount' => $total,
-                'date' => date("Y-m-d H:i:s")
+                'total_amount' => $total
             ];
 
-            if(!isset($_SESSION['order_history'])){
-                $_SESSION['order_history'] = [];
+            $order_id = addOrder($order);
+
+            if($order_id){
+                $_SESSION['current_order'] = $order;
+                $_SESSION['current_order']['order_id'] = $order_id;
+                $_SESSION['current_order']['items'] = $_SESSION['cart'];
+                $_SESSION['current_order']['date'] = date("Y-m-d");
+                $_SESSION['current_order']['payment_method'] = $payment_method;
+
+                unset($_SESSION['cart']);
+                
+                header('location: ../views/invoice.php');
+            } else {
+                echo "Error placing order in Database.";
             }
-            array_push($_SESSION['order_history'], $order);
-
-            $_SESSION['current_order'] = $order;
-
-            unset($_SESSION['cart']);
-
-            header('location: ../views/invoice.php');
         }
 
     } else {

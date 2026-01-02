@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('../models/user_model.php');
+require_once('../models/userModel.php');
 
 if($_POST['action'] == "signup"){
     $user = [
@@ -24,6 +24,8 @@ if($_POST['action'] == "login"){
 
     if(loginUser($user)){
         $_SESSION['customer_logged_in'] = true;
+        $userData = getUserByEmail($user['email']);
+        $_SESSION['customer_name'] = $userData['username'];
         header("Location: ../views/customer_menudemo.php");
     } else {
         echo "Invalid Login";

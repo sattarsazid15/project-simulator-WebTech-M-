@@ -1,5 +1,5 @@
 function validateSignup() {
-    var name = document.getElementById("name").value;
+    var name = document.getElementById("username").value;
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
 

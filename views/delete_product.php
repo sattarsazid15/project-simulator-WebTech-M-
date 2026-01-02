@@ -1,33 +1,38 @@
-<?php session_start(); ?>
+<?php 
+session_start(); 
+require_once('../models/productModel.php');
+$result = getAllProducts();
+?>
 <!DOCTYPE html>
 <html>
+<head>
+    <title>Manage Products</title>
+</head>
 <body>
-
-<h2>Manage Products</h2>
-
-<table border="1">
-<tr>
-    <th>Image</th>
-    <th>Type</th>
-    <th>Action</th>
-</tr>
-
-<?php
-if (!empty($_SESSION['products'])) {
-    foreach ($_SESSION['products'] as $index => $product) {
-        echo "<tr>";
-        echo "<td><img src='../assets/uploads/".$product['image']."' width='80'></td>";
-        echo "<td>".$product['type']."</td>";
-        echo "<td>
-            <a href='../controllers/product_controller.php?edit=$index'>Edit</a>
-            |
-            <a href='../controllers/product_controller.php?delete=$index'>Delete</a>
-        </td>";
-        echo "</tr>";
-    }
-}
-?>
-</table>
-
+<center>
+    <h2>Manage Products</h2>
+    <a href="product_menu.php">Back to Menu</a>
+    <br><br>
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+        <?php while($row = mysqli_fetch_assoc($result)) { ?>
+        <tr>
+            <td><img src="../assets/uploads/<?php echo $row['image']; ?>" width="50"></td>
+            <td><?php echo $row['name']; ?></td>
+            <td><?php echo $row['type']; ?></td>
+            <td><?php echo $row['price']; ?> Tk</td>
+            <td>
+                <a href="../controllers/product_controller.php?delete=<?php echo $row['id']; ?>">Delete</a>
+            </td>
+        </tr>
+        <?php } ?>
+    </table>
+</center>
 </body>
 </html>

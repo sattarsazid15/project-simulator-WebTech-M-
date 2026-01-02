@@ -1,13 +1,6 @@
 <?php
     session_start();
 
-    if(!isset($_SESSION['cart'])){
-        $_SESSION['cart'] = [
-            ['name' => 'iPhone 13', 'price' => 80000, 'qty' => 1],
-            ['name' => 'Back Cover', 'price' => 500, 'qty' => 2]
-        ];
-    }
-
     $totalAmount = 0;
     if(isset($_SESSION['cart'])){
         foreach($_SESSION['cart'] as $item){

@@ -18,7 +18,7 @@
 
         <div class="form-group">
             <label>Name</label>
-            <input type="text" name="name" id="name">
+            <input type="text" name="username" id="username">
         </div>
 
         <div class="form-group">
