@@ -171,3 +171,14 @@ function validateTechPassword(){
     }
     return true;
 }
+
+function validateAdminLogin() {
+    let username = document.getElementById("admin_username").value.trim();
+    let password = document.getElementById("admin_password").value.trim();
+
+    if (username === "" || password === "") {
+        alert("All fields are required");
+        return false;
+    }
+    return true;
+}

@@ -13,8 +13,7 @@ $result = getAllProducts();
 <body>
 <center>
     <h2>Available Products</h2>
-    <a href="customer_menudemo.php">Back to Dashboard</a> | 
-    <a href="../views/checkout.php">Go to Checkout</a>
+    <a href="admin_dashboard.php">Back to Dashboard</a>
     <br><br>
 
     <?php while($row = mysqli_fetch_assoc($result)) { ?>

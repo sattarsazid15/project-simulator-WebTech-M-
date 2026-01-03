@@ -1,25 +1,20 @@
+<!DOCTYPE html>
 <html>
 <head>
     <title>Select Role</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/home.css">
 </head>
 <body>
 
-<h2>Select Your Role</h2>
+<div class="home-wrapper">
 
-<div class="roles">
-    <div class="role">
-        <a href="admin_login.php">Admin</a>
+    <h1>SELECT YOUR ROLES</h1>
+
+    <div class="roles-bg"></div>
+    <div class="role-buttons">
+        <a href="admin_login.php" class="role-btn">Admin</a>
+        <a href="technician_signup.php" class="role-btn">Technician</a>
+        <a href="customer_login.php" class="role-btn">Customer</a>
     </div>
 
-    <div class="role">
-        <a href="customer_login.php">Customer</a>
-    </div>
-
-    <div class="role">
-        <a href="technician_signup.php">Technician</a>
-    </div>
 </div>
-
-</body>
-</html>

@@ -49,4 +49,13 @@ function searchProducts($query){
     $sql = "SELECT * FROM products WHERE name LIKE '%{$query}%' OR type LIKE '%{$query}%'";
     return mysqli_query($con, $sql);
 }
+
+function getTotalProducts(){
+    $con = getConnection();
+    $sql = "SELECT COUNT(*) AS total FROM products";
+    $result = mysqli_query($con, $sql);
+    $data = mysqli_fetch_assoc($result);
+    return $data['total'];
+}
+
 ?>

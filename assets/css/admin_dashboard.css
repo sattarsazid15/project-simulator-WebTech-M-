@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.admin-header {
+    background-color: #155e7c;
+    padding: 30px;
+    color: #000;
+}
+
+.admin-header h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.admin-header h1 {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.admin-container {
+    display: flex;
+    padding: 20px;
+}
+
+.stats-area {
+    background: #bfbfbf;
+    padding: 30px;
+    width: 75%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.stat-card {
+    padding: 30px;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+}
+
+.stat-card h3 {
+    margin-top: 10px;
+    font-size: 22px;
+}
+
+.customers {
+    background: #7a3308;
+}
+
+.technicians {
+    background: #4d97d8;
+}
+
+.products {
+    background: #d77ad6;
+}
+
+.earnings {
+    background: #174f1c;
+}
+
+.admin-side-panel {
+    width: 25%;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.side-btn {
+    background: #b7d7f0;
+    padding: 18px;
+    text-align: center;
+    text-decoration: none;
+    color: #000;
+    font-size: 16px;
+    border-radius: 12px;
+    border: 2px solid #000;
+}
+
+.side-btn:hover {
+    background: #9fc7e8;
+}
+
+.logout {
+    margin-top: auto;
+    background: #b7d7f0;
+}
