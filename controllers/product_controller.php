@@ -19,11 +19,25 @@ if (isset($_POST['type'])) {
         exit;
     }
 
-    $imageName = $_FILES['image']['name'];
-    $imageTmp  = $_FILES['image']['tmp_name'];
+    if (!isset($_FILES['image']['name']) || $_FILES['image']['name'] == "") {
+        echo "Error: Product Image is Mandatory.";
+        exit;
+    }
 
-    if ($imageName != "") {
-        move_uploaded_file($imageTmp, "../assets/uploads/" . $imageName);
+    $imageName = "";
+    $src = $_FILES['image']['tmp_name'];
+    
+    $ext = explode('.', $_FILES['image']['name']);
+    $index = count($ext) - 1;
+    
+    $imageName = time() . "." . $ext[$index]; 
+    $des = '../assets/uploads/' . $imageName;
+
+    if(move_uploaded_file($src, $des)) {
+    
+    } else {
+        echo "Error uploading file.";
+        exit;
     }
 
     $name = isset($_POST['model']) ? $_POST['model'] : (isset($_POST['brand']) ? $_POST['brand'] : 'Unknown Product');
@@ -38,12 +52,12 @@ if (isset($_POST['type'])) {
 
     if(addProduct($product)){
         echo "Product added to Database successfully.";
-        echo "<br><a href='../views/product_menu.php'>Back to Menu</a>";
+        echo "<br><a href='../views/admin_dashboard.php'>Back to Dashboard</a>";
     } else {
         echo "Error adding product to Database.";
     }
 
 } else {
-    header("Location: ../views/product_menu.php");
+    header("Location: ../views/admin_dashboard.php");
 }
 ?>

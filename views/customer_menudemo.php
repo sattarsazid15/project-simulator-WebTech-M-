@@ -2,7 +2,7 @@
 session_start();
 require_once('../models/productModel.php');
 
-if(!isset($_SESSION['customer']) && !isset($_COOKIE['status']) ){
+if(!isset($_SESSION['customer']) && !isset($_COOKIE['status'])){
     header("Location: customer_login.php");
     exit();
 }
@@ -73,6 +73,7 @@ $result = getAllProducts();
         <a href="#" class="side-btn">Repair Status ⚙️</a>
         <a href="#" class="side-btn">View Cart 🛒</a>
         <a href="checkout.php" class="side-btn">Checkout 💳</a>
+        <a href="repair_request.php" class="btn">Request Repair</a>
         <a href="../controllers/logout.php" class="side-btn logout">Logout ➜</a>
     </div>
 
