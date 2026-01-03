@@ -33,6 +33,8 @@ if($_POST['action'] == "login"){
             'email' => $userData['email']
         ];
 
+        setcookie('status', 'true', time()+3000, '/');
+
         header("Location: ../views/customer_menudemo.php");
         exit;
 

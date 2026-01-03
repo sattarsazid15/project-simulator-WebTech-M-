@@ -2,7 +2,7 @@
 session_start();
 require_once('../models/productModel.php');
 
-if(!isset($_SESSION['customer'])){
+if(!isset($_SESSION['customer']) && !isset($_COOKIE['status']) ){
     header("Location: customer_login.php");
     exit();
 }
@@ -18,23 +18,23 @@ $result = getAllProducts();
 </head>
 <body>
 
-<!-- HEADER -->
+
 <div class="header">
     <h2>Welcome <?= $_SESSION['customer']['username']; ?></h2>
     <h1>Online Mobile Shop & Servicing Center</h1>
 </div>
 
-<!-- MAIN LAYOUT -->
+
 <div class="main-container">
 
-    <!-- LEFT CONTENT -->
+
     <div class="content-area">
 
         <div class="offers-box">
             Offers will be added later
         </div>
 
-        <!-- FILTER -->
+       
         <select class="filter-btn" onchange="filterProducts(this.value)">
             <option value="all">All Products</option>
             <option value="mobile">Mobile</option>
@@ -42,7 +42,7 @@ $result = getAllProducts();
             <option value="gadgets">Gadgets</option>
         </select>
 
-        <!-- PRODUCTS -->
+     
         <div class="products-box">
             <h2>Products</h2>
 
@@ -65,7 +65,7 @@ $result = getAllProducts();
 
     </div>
 
-    <!-- RIGHT PANEL -->
+   
     <div class="side-panel">
         <a href="customer_edit_profile.php" class="side-btn">Edit Profile 👤</a>
         <a href="#" class="side-btn">Browse Product 🔎︎</a>
@@ -78,7 +78,7 @@ $result = getAllProducts();
 
 </div>
 
-<!-- JS FILTER -->
+
 <script>
 function filterProducts(type) {
     const products = document.querySelectorAll('.product-card');
