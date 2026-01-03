@@ -43,4 +43,10 @@ function getProductById($id){
     $result = mysqli_query($con, $sql);
     return mysqli_fetch_assoc($result);
 }
+
+function searchProducts($query){
+    $con = getConnection();
+    $sql = "SELECT * FROM products WHERE name LIKE '%{$query}%' OR type LIKE '%{$query}%'";
+    return mysqli_query($con, $sql);
+}
 ?>

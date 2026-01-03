@@ -1,14 +1,16 @@
 <?php
 session_start();
+require_once('../models/userModel.php');
 
 if(!isset($_SESSION['customer'])){
     header("Location: customer_login.php");
     exit;
 }
+
+$currentUser = getUserByEmail($_SESSION['customer']['email']);
 ?>
 
-<!-- alert -->
- <?php
+<?php
 if(isset($_GET['success'])){
     if($_GET['success'] == 'profile'){
         echo "<script>alert('Profile updated successfully');</script>";
@@ -47,13 +49,13 @@ if(isset($_GET['error'])){
         <div class="form-group">
             <label>Username</label>
             <input type="text" name="username"
-                   value="<?= $_SESSION['customer']['username'] ?>">
+                   value="<?= $currentUser['username'] ?>">
         </div>
 
         <div class="form-group">
             <label>Email</label>
             <input type="text" name="email"
-                   value="<?= $_SESSION['customer']['email'] ?>">
+                   value="<?= $currentUser['email'] ?>">
         </div>
 
         <button type="submit" name="update_profile">Update Profile</button>

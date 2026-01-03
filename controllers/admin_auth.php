@@ -12,10 +12,10 @@ if ($_POST['username'] == "admin" && $_POST['password'] == "admin") {
 
 if(isset($_GET['approve'])){
     approveTechnician($_GET['approve']);
-    header("Location: ../views/admin_dashboard.php");
+    header("Location: ../views/technician_request.php");
 }
 
 if(isset($_GET['decline'])){
     declineTechnician($_GET['decline']);
-    header("Location: ../views/admin_dashboard.php");
+    header("Location: ../views/technician_request.php");
 }
