@@ -105,7 +105,7 @@ $total_price = 0;
 
             <br>
             <div style="text-align: right;">
-                <form action="../controllers/order_controller.php" method="POST">
+                <form action="../controllers/orderController.php" method="POST">
                     <input type="hidden" name="total_amount" value="<?= $total_price; ?>">
                     <button type="button" class="btn" style="background:#28a745; font-size:1.2em;" onclick="alert('Payment Gateway Integration Coming Soon!')">Proceed to Payment</button>
                 </form>

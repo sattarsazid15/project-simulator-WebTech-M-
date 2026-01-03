@@ -10,7 +10,6 @@ body {
     padding: 40px;
 }
 
-/* Center card */
 .form-container {
     max-width: 480px;
     margin: auto;
@@ -26,7 +25,6 @@ h2 {
     color: #222222;
 }
 
-/* Label style */
 label {
     display: block;
     font-size: 14px;
@@ -34,18 +32,28 @@ label {
     color: #444444;
 }
 
-/* Inputs */
 input[type="text"],
-input[type="file"] {
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="file"],
+select,
+textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 18px;
     border: 1px solid #cccccc;
     border-radius: 6px;
     font-size: 14px;
+    background-color: #fff;
 }
 
-/* Button */
+input:focus, select:focus, textarea:focus {
+    border-color: #0d6efd;
+    outline: none;
+    box-shadow: 0 0 5px rgba(13, 110, 253, 0.2);
+}
+
 button {
     width: 100%;
     padding: 12px;
@@ -55,8 +63,33 @@ button {
     font-size: 16px;
     border-radius: 6px;
     cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
 }
 
 button:hover {
-    background-color: #084298;
+    background-color: #0b5ed7;
+}
+
+.form-footer {
+    margin-top: 15px;
+}
+
+.form-footer a {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    background-color: #e9ecef;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.form-footer a:hover {
+    background-color: #dde0e3;
+    color: #000;
 }

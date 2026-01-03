@@ -90,3 +90,21 @@ function getApprovedTechnCount(){
 }
 
 
+function getAllApprovedTechnicians(){
+    $con = getConnection();
+    $sql = "SELECT * FROM technicians WHERE status='approved'"; 
+    return mysqli_query($con, $sql);
+}
+
+function deleteTechnician($id){
+    $con = getConnection();
+    $sql = "DELETE FROM technicians WHERE id='{$id}'";
+    return mysqli_query($con, $sql);
+}
+
+function updateTechnicianByAdmin($id, $username, $email, $specialization){
+    $con = getConnection();
+    $sql = "UPDATE technicians SET username='{$username}', email='{$email}', specialization='{$specialization}' WHERE id='{$id}'";
+    return mysqli_query($con, $sql);
+}
+?>

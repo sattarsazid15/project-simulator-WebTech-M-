@@ -85,4 +85,22 @@ function getTotalCustomers(){
     return $data['total'];
 }
 
+
+function getAllCustomers(){
+    $con = getConnection();
+    $sql = "SELECT * FROM users";
+    return mysqli_query($con, $sql);
+}
+
+function deleteCustomer($id){
+    $con = getConnection();
+    $sql = "DELETE FROM users WHERE id='{$id}'";
+    return mysqli_query($con, $sql);
+}
+
+function updateCustomerByAdmin($id, $username, $email){
+    $con = getConnection();
+    $sql = "UPDATE users SET username='{$username}', email='{$email}' WHERE id='{$id}'";
+    return mysqli_query($con, $sql);
+}
 ?>
