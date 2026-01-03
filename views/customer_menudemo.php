@@ -1,12 +1,15 @@
 <?php
 session_start();
+require_once('../models/productModel.php');
 
 if(!isset($_SESSION['customer'])){
     header("Location: customer_login.php");
     exit();
 }
 
+$result = getAllProducts();
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,30 +18,54 @@ if(!isset($_SESSION['customer'])){
 </head>
 <body>
 
+<!-- HEADER -->
 <div class="header">
     <h2>Welcome <?= $_SESSION['customer']['username']; ?></h2>
-    <h1>To our Online Mobile Shop and Servicing Center</h1>
+    <h1>Online Mobile Shop & Servicing Center</h1>
 </div>
 
+<!-- MAIN LAYOUT -->
 <div class="main-container">
 
+    <!-- LEFT CONTENT -->
     <div class="content-area">
 
         <div class="offers-box">
-            Will add offers here later
+            Offers will be added later
         </div>
 
-        <button class="filter-btn">Filter product</button>
+        <!-- FILTER -->
+        <select class="filter-btn" onchange="filterProducts(this.value)">
+            <option value="all">All Products</option>
+            <option value="mobile">Mobile</option>
+            <option value="computer">Computer</option>
+            <option value="gadgets">Gadgets</option>
+        </select>
 
+        <!-- PRODUCTS -->
         <div class="products-box">
             <h2>Products</h2>
-            <p>
-                (will add from database later after finishing adding product)
-            </p>
+
+            <?php while($row = mysqli_fetch_assoc($result)) { ?>
+                <div class="product-card" data-type="<?= strtolower($row['type']); ?>">
+                    <img src="../assets/uploads/<?= $row['image']; ?>" alt="Product Image">
+
+                    <b><?= $row['name']; ?></b><br>
+                    Type: <?= $row['type']; ?><br>
+                    Price: $<?= $row['price']; ?><br><br>
+
+                    <a href="product_details.php?id=<?= $row['id']; ?>">
+                        <button>View Details / Buy</button>
+                    </a>
+
+                    <button onclick="alert('Added to Cart!')">Add to Cart</button>
+                </div>
+            <?php } ?>
         </div>
 
     </div>
 
+    <!-- RIGHT PANEL -->
     <div class="side-panel">
         <a href="customer_edit_profile.php" class="side-btn">Edit Profile 👤</a>
         <a href="#" class="side-btn">Browse Product 🔎︎</a>
@@ -46,11 +73,25 @@ if(!isset($_SESSION['customer'])){
         <a href="#" class="side-btn">Repair Status ⚙️</a>
         <a href="#" class="side-btn">View Cart 🛒</a>
         <a href="checkout.php" class="side-btn">Checkout 💳</a>
-        <a href="../controllers/logout.php" class="side-btn logout">Logout ➜]</a>
+        <a href="../controllers/logout.php" class="side-btn logout">Logout ➜</a>
     </div>
 
 </div>
 
+<!-- JS FILTER -->
+<script>
+function filterProducts(type) {
+    const products = document.querySelectorAll('.product-card');
+
+    products.forEach(product => {
+        if (type === 'all' || product.dataset.type === type) {
+            product.style.display = 'inline-block';
+        } else {
+            product.style.display = 'none';
+        }
+    });
+}
+</script>
+
 </body>
 </html>
-
