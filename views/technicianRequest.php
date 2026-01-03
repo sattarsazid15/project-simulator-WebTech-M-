@@ -65,7 +65,6 @@ if(!isset($_SESSION['admin']) && !isset($_COOKIE['admin_status'])){
     <div class="side-panel">
         <a href="adminDashboard.php" class="side-btn">Dashboard 🏠</a>
         <a href="products.php" class="side-btn">Manage Products 📦</a>
-        <a href="addProduct.php" class="side-btn">Add Product ➕</a>
         <a href="../controllers/logout.php" class="side-btn logout">Logout ➜</a>
     </div>
 

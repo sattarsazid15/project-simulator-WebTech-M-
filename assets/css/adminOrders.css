@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f6f8;
+}
+
+.header {
+    background-color: #155f7d;
+    color: white;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.header h2 { font-weight: normal; color: #f0f0f0; }
+.header h1 { margin-top: 10px; font-weight: bold; }
+
+.main-container {
+    display: flex;
+    padding: 20px;
+}
+
+.content-area {
+    width: calc(100% - 260px);
+    padding-right: 20px;
+}
+
+.side-panel {
+    width: 220px;
+    position: fixed;
+    right: 20px;
+    top: 160px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.side-btn {
+    text-decoration: none;
+    text-align: center;
+    padding: 15px;
+    background-color: #b7d7f2;
+    color: rgb(12, 11, 11);
+    border-radius: 10px;
+    font-weight: bold;
+    display: block;
+}
+
+.side-btn:hover { background-color: #419feb; }
+.logout { background-color: #b7d7f2; }
+
+.table-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.table-box h3 {
+    color: #155f7d;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f8f9fa;
+    color: #333;
+    font-weight: bold;
+}
+
+select {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.btn-update {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.btn-update:hover { background-color: #0056b3; }
+
+.status-Pending { color: orange; font-weight: bold; }
+.status-Processing { color: blue; font-weight: bold; }
+.status-Delivered { color: green; font-weight: bold; }
+.status-Cancelled { color: red; font-weight: bold; }
