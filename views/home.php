@@ -8,7 +8,8 @@
 
 <div class="home-wrapper">
 
-    <h1>SELECT YOUR ROLES</h1>
+    <h1>Welcome To Online Mobile Shop & Servicing Center<h1>
+    <h2>SELECT YOUR ROLES</h2>
 
     <div class="roles-bg"></div>
     <div class="role-buttons">
