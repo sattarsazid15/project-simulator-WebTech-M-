@@ -13,7 +13,7 @@
     <div class="roles-bg"></div>
     <div class="role-buttons">
         <a href="admin_login.php" class="role-btn">Admin</a>
-        <a href="technician_signup.php" class="role-btn">Technician</a>
+        <a href="technician_login.php" class="role-btn">Technician</a>
         <a href="customer_login.php" class="role-btn">Customer</a>
     </div>
 
