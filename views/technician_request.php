@@ -7,6 +7,13 @@ if(!isset($_SESSION['admin']) && !isset($_COOKIE['admin_status'])){
 }
 ?>
 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Technician Request</title>
+</head>
+<body>
+
 <h3>Pending Technicians</h3>
 
 <table border="1" cellpadding="10">
@@ -36,3 +43,9 @@ if(mysqli_num_rows($result) > 0){
 }
 ?>
 </table>
+
+<br>
+<a href="admin_dashboard.php">Back to Dashboard</a>
+
+</body>
+</html>

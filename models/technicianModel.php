@@ -81,3 +81,12 @@ function getTechnicianByEmail($email){
     return mysqli_fetch_assoc($result);
 }
 
+function getApprovedTechnCount(){
+    $con = getConnection();
+    $sql = "SELECT COUNT(*) AS total FROM technicians WHERE status='approved'";
+    $result = mysqli_query($con, $sql);
+    $data = mysqli_fetch_assoc($result);
+    return $data['total'];
+}
+
+

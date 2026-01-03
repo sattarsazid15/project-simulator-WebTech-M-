@@ -77,4 +77,12 @@ function changePassword($id, $oldPass, $newPass){
     return false;
 }
 
+function getTotalCustomers(){
+    $con = getConnection();
+    $sql = "SELECT COUNT(*) AS total FROM users";
+    $result = mysqli_query($con, $sql);
+    $data = mysqli_fetch_assoc($result);
+    return $data['total'];
+}
+
 ?>
