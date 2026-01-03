@@ -56,7 +56,7 @@
             <input type="text" name="shop" id="shop">
         </div>
 
-        <button type="submit">Submit</button>
+        <button type="submit" name="submit">Submit</button>
     </form>
 
     <div class="form-footer">
