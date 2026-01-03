@@ -75,7 +75,6 @@ $result = getAllProducts();
         <a href="repair_request.php" class="side-btn">Request Repair 🛠️</a>
         
         <a href="#" class="side-btn">Repair Status ⚙️</a>
-        <a href="#" class="side-btn">View Cart 🛒</a>
         
         <a href="checkout.php" class="side-btn">Checkout 💳</a>
         
