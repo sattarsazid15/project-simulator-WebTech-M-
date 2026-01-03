@@ -2,7 +2,7 @@
 session_start();
 require_once('../models/userModel.php');
 
-if(!isset($_SESSION['customer'])){
+if(!isset($_SESSION['customer']) && !isset($_COOKIE['status'])){
     header("Location: customer_login.php");
     exit;
 }

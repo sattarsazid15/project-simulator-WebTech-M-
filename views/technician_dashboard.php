@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['technician'])) {
+if (!isset($_SESSION['technician']) && !isset($_COOKIE['tech_status'])) {
     header("Location: technician_login.php");
 }
 ?>

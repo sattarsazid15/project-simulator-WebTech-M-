@@ -44,10 +44,10 @@
 
         <div class="form-group">
             <label>Gender</label>
-            <select name="gender">
+            <select name="gender" id="gender">
                 <option value="">Select</option>
-                <option>Male</option>
-                <option>Female</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
             </select>
         </div>
 
