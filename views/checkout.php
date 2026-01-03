@@ -3,7 +3,7 @@ session_start();
 require_once('../models/productModel.php');
 
 if(!isset($_SESSION['customer']) && !isset($_COOKIE['status'])){
-    header("Location: customer_login.php");
+    header("Location: customerLogin.php");
     exit();
 }
 
@@ -15,7 +15,7 @@ $total_price = 0;
 <html>
 <head>
     <title>Checkout</title>
-    <link rel="stylesheet" href="../assets/css/technician_dashboard.css">
+    <link rel="stylesheet" href="../assets/css/technicianDashboard.css">
     <link rel="stylesheet" href="../assets/css/style1.css">
     <style>
         .checkout-container {
@@ -46,14 +46,14 @@ $total_price = 0;
 
 <div class="main-container" style="display:block;">
     <div class="checkout-container">
-        <a href="customer_menudemo.php" class="btn">Back to Shopping</a>
+        <a href="customerDashboard.php" class="btn">Back to Shopping</a>
         <br><br>
 
         <?php if(empty($cart)) { ?>
             <center>
                 <h3>Your cart is empty.</h3>
                 <br>
-                <a href="customer_menudemo.php" class="btn" style="background:#28a745;">Browse Products</a>
+                <a href="customerDashboard.php" class="btn" style="background:#28a745;">Browse Products</a>
             </center>
         <?php } else { ?>
 
@@ -83,7 +83,7 @@ $total_price = 0;
                         </td>
                         <td>Tk <?= $product['price']; ?></td>
                         <td>
-                            <form method="POST" action="../controllers/cart_controller.php" style="display:inline;">
+                            <form method="POST" action="../controllers/cartController.php" style="display:inline;">
                                 <input type="hidden" name="update_qty" value="true">
                                 <input type="hidden" name="id" value="<?= $id; ?>">
                                 <input type="number" name="qty" value="<?= $qty; ?>" min="1" max="5" class="qty-input" onchange="this.form.submit()">
@@ -91,7 +91,7 @@ $total_price = 0;
                         </td>
                         <td>Tk <?= $subtotal; ?></td>
                         <td>
-                            <a href="../controllers/cart_controller.php?remove=<?= $id; ?>" style="color:red; font-weight:bold;">Remove</a>
+                            <a href="../controllers/cartController.php?remove=<?= $id; ?>" style="color:red; font-weight:bold;">Remove</a>
                         </td>
                     </tr>
                     <?php } ?>

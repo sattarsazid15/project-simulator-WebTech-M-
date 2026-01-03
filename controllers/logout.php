@@ -6,6 +6,6 @@ setcookie('status', 'true', time()-10, '/');
 setcookie('admin_status', 'true', time()-10, '/');
 setcookie('tech_status', 'true', time()-10, '/');
 
-header("Location: ../views/home.php");
+header("Location: ../index.php");
 exit();
 ?>
