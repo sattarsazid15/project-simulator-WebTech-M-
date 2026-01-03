@@ -2,7 +2,7 @@
 session_start();
 require_once('../models/technicianModel.php');
 
-if(!isset($_SESSION['admin'])){
+if(!isset($_SESSION['admin']) && !isset($_COOKIE['admin_status'])){
     header("Location: admin_login.php");
 }
 ?>

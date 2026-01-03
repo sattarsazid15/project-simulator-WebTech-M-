@@ -1,15 +1,28 @@
 function validateSignup() {
-    var name = document.getElementById("username").value;
-    var email = document.getElementById("email").value;
+    var name = document.getElementById("username").value.trim();
+    var email = document.getElementById("email").value.trim();
     var password = document.getElementById("password").value;
 
     if (name === "" || email === "" || password === "") {
-        alert("All fields are required");
+        alert("All fields are required (and cannot be empty spaces).");
         return false;
     }
 
-    if (email.indexOf("@") === -1 || email.indexOf(".") === -1) {
-        alert("Invalid email format");
+    if (name.length < 2) {
+        alert("Username must be at least 2 characters.");
+        return false;
+    }
+
+    if (password.length < 6) {
+        alert("Password must have at least 6 characters!");
+        return false;
+    }
+
+    var atPos = email.indexOf('@');
+    var dotPos = email.lastIndexOf('.');
+
+    if (atPos < 1 || dotPos < atPos + 2 || dotPos + 2 >= email.length) {
+        alert("Invalid email format (e.g., user@example.com)");
         return false;
     }
 
@@ -66,16 +79,41 @@ function validateTechLogin() {
 }
 
 function validateTechSignup() {
-    const fields = [
-        "email", "username", "password",
-        "specialist", "experience", "dob", "shop"
-    ];
+    var email = document.getElementById("email").value.trim();
+    var username = document.getElementById("username").value.trim();
+    var password = document.getElementById("password").value;
+    var specialist = document.getElementById("specialist").value.trim();
+    var experience = document.getElementById("experience").value.trim();
+    var dob = document.getElementById("dob").value;
+    var shop = document.getElementById("shop").value.trim();
+    var gender = document.getElementById("gender").value; 
 
-    for (let i = 0; i < fields.length; i++) {
-        if (document.getElementById(fields[i]).value === "") {
-            alert("Please fill all fields");
-            return false;
-        }
+    if (email === "" || username === "" || password === "" || specialist === "" || experience === "" || dob === "" || shop === "" || gender === "") {
+        alert("All fields are required.");
+        return false;
+    }
+
+    if (username.length < 2) {
+        alert("Username must be at least 2 characters.");
+        return false;
+    }
+
+    if (password.length < 6) {
+        alert("Password must be at least 6 characters.");
+        return false;
+    }
+
+    if (isNaN(experience)) {
+        alert("Experience must be a number.");
+        return false;
+    }
+
+    var atPos = email.indexOf('@');
+    var dotPos = email.lastIndexOf('.');
+
+    if (atPos < 1 || dotPos < atPos + 2 || dotPos + 2 >= email.length) {
+        alert("Invalid email format.");
+        return false;
     }
 
     return true;
@@ -133,7 +171,3 @@ function validateTechPassword(){
     }
     return true;
 }
-
-
-
-

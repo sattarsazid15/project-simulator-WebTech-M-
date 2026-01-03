@@ -14,8 +14,8 @@ if (isset($_GET['delete'])) {
 
 if (isset($_POST['type'])) {
     
-    if($_POST['price'] == "" || $_POST['type'] == ""){
-        echo "Price and Type are required.";
+    if($_POST['price'] == "" || $_POST['type'] == "" || $_POST['name'] == ""){
+        echo "Name, Price, and Type are required.";
         exit;
     }
 
@@ -26,24 +26,31 @@ if (isset($_POST['type'])) {
 
     $imageName = "";
     $src = $_FILES['image']['tmp_name'];
-    
-    $ext = explode('.', $_FILES['image']['name']);
-    $index = count($ext) - 1;
-    
-    $imageName = time() . "." . $ext[$index]; 
+    $originalName = $_FILES['image']['name'];
+
+    $extArray = explode('.', $originalName);
+    $index = count($extArray) - 1;
+    $ext = strtolower($extArray[$index]);
+
+    $allowed_extensions = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+
+    if(!in_array($ext, $allowed_extensions)){
+        echo "Error: Invalid file type. Only JPG, PNG, WEBP, and GIF are allowed.";
+        exit;
+    }
+
+    $imageName = time() . "." . $ext; 
     $des = '../assets/uploads/' . $imageName;
 
     if(move_uploaded_file($src, $des)) {
-    
+        
     } else {
         echo "Error uploading file.";
         exit;
     }
-
-    $name = isset($_POST['model']) ? $_POST['model'] : (isset($_POST['brand']) ? $_POST['brand'] : 'Unknown Product');
     
     $product = [
-        'name' => $name,
+        'name' => $_POST['name'], 
         'type' => $_POST['type'],
         'price' => $_POST['price'],
         'description' => isset($_POST['description']) ? $_POST['description'] : '',
@@ -51,8 +58,8 @@ if (isset($_POST['type'])) {
     ];
 
     if(addProduct($product)){
-        echo "Product added to Database successfully.";
-        echo "<br><a href='../views/admin_dashboard.php'>Back to Dashboard</a>";
+        echo "Product added successfully! <br>";
+        echo "<a href='../views/admin_dashboard.php'>Back to Dashboard</a>";
     } else {
         echo "Error adding product to Database.";
     }

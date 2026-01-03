@@ -18,15 +18,12 @@ $result = getAllProducts();
 </head>
 <body>
 
-
 <div class="header">
-    <h2>Welcome <?= $_SESSION['customer']['username']; ?></h2>
+    <h2>Welcome <?= isset($_SESSION['customer']['username']) ? $_SESSION['customer']['username'] : 'Customer'; ?></h2>
     <h1>Online Mobile Shop & Servicing Center</h1>
 </div>
 
-
 <div class="main-container">
-
 
     <div class="content-area">
 
@@ -34,19 +31,19 @@ $result = getAllProducts();
             Offers will be added later
         </div>
 
-       
         <select class="filter-btn" onchange="filterProducts(this.value)">
             <option value="all">All Products</option>
             <option value="mobile">Mobile</option>
             <option value="computer">Computer</option>
-            <option value="gadgets">Gadgets</option>
-        </select>
+            <option value="gadget">Gadgets</option> </select>
 
-     
         <div class="products-box">
             <h2>Products</h2>
 
-            <?php while($row = mysqli_fetch_assoc($result)) { ?>
+            <?php 
+            if(mysqli_num_rows($result) > 0){
+                while($row = mysqli_fetch_assoc($result)) { 
+            ?>
                 <div class="product-card" data-type="<?= strtolower($row['type']); ?>">
                     <img src="../assets/uploads/<?= $row['image']; ?>" alt="Product Image">
 
@@ -60,25 +57,32 @@ $result = getAllProducts();
 
                     <button onclick="alert('Added to Cart!')">Add to Cart</button>
                 </div>
-            <?php } ?>
+            <?php 
+                }
+            } else {
+                echo "<p>No products available.</p>";
+            }
+            ?>
         </div>
 
     </div>
 
-   
     <div class="side-panel">
         <a href="customer_edit_profile.php" class="side-btn">Edit Profile 👤</a>
-        <a href="#" class="side-btn">Browse Product 🔎︎</a>
-        <a href="#" class="side-btn">Go for repair 🛠️</a>
+        
+        <a href="product_browse.php" class="side-btn">Browse Product 🔎︎</a>
+        
+        <a href="repair_request.php" class="side-btn">Request Repair 🛠️</a>
+        
         <a href="#" class="side-btn">Repair Status ⚙️</a>
         <a href="#" class="side-btn">View Cart 🛒</a>
+        
         <a href="checkout.php" class="side-btn">Checkout 💳</a>
-        <a href="repair_request.php" class="btn">Request Repair</a>
+        
         <a href="../controllers/logout.php" class="side-btn logout">Logout ➜</a>
     </div>
 
 </div>
-
 
 <script>
 function filterProducts(type) {

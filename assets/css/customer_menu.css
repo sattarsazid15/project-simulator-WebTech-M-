@@ -107,7 +107,6 @@ body {
     border-radius: 6px;
 }
 
-/* image fix */
 .product-card img {
     width: 180px;
     height: 180px;
@@ -131,5 +130,3 @@ body {
 .product-card button:hover {
     background: #0056b3;
 }
-
-
