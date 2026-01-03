@@ -1,28 +1,17 @@
 <?php
 require_once('db.php');
 
-function addProduct($product){
-    $con = getConnection();
-    $sql = "INSERT INTO products (name, type, price, description, image) 
-            VALUES (
-                '{$product['name']}', 
-                '{$product['type']}', 
-                '{$product['price']}', 
-                '{$product['description']}', 
-                '{$product['image']}'
-            )";
-    
-    if(mysqli_query($con, $sql)){
-        return true;
-    } else {
-        return false;
-    }
-}
-
 function getAllProducts(){
     $con = getConnection();
     $sql = "SELECT * FROM products";
     return mysqli_query($con, $sql);
+}
+
+function getProductById($id){
+    $con = getConnection();
+    $sql = "SELECT * FROM products WHERE id='{$id}'";
+    $result = mysqli_query($con, $sql);
+    return mysqli_fetch_assoc($result);
 }
 
 function getProductsByType($type){
@@ -31,31 +20,54 @@ function getProductsByType($type){
     return mysqli_query($con, $sql);
 }
 
-function deleteProduct($id){
-    $con = getConnection();
-    $sql = "DELETE FROM products WHERE id={$id}";
-    return mysqli_query($con, $sql);
-}
-
-function getProductById($id){
-    $con = getConnection();
-    $sql = "SELECT * FROM products WHERE id={$id}";
-    $result = mysqli_query($con, $sql);
-    return mysqli_fetch_assoc($result);
-}
-
 function searchProducts($query){
     $con = getConnection();
     $sql = "SELECT * FROM products WHERE name LIKE '%{$query}%' OR type LIKE '%{$query}%'";
     return mysqli_query($con, $sql);
 }
 
-function getTotalProducts(){
+function addProduct($product){
     $con = getConnection();
-    $sql = "SELECT COUNT(*) AS total FROM products";
-    $result = mysqli_query($con, $sql);
-    $data = mysqli_fetch_assoc($result);
-    return $data['total'];
+    $sql = "INSERT INTO products (name, type, price, description, image) 
+            VALUES ('{$product['name']}', '{$product['type']}', '{$product['price']}', '{$product['description']}', '{$product['image']}')";
+    return mysqli_query($con, $sql);
 }
 
+function deleteProduct($id){
+    $con = getConnection();
+    $sql = "DELETE FROM products WHERE id='{$id}'";
+    return mysqli_query($con, $sql);
+}
+
+function updateProduct($product){
+    $con = getConnection();
+    
+   
+    if($product['image'] != ""){
+        $sql = "UPDATE products SET 
+                name='{$product['name']}', 
+                type='{$product['type']}', 
+                price='{$product['price']}', 
+                description='{$product['description']}', 
+                image='{$product['image']}' 
+                WHERE id='{$product['id']}'";
+    } else {
+        $sql = "UPDATE products SET 
+                name='{$product['name']}', 
+                type='{$product['type']}', 
+                price='{$product['price']}', 
+                description='{$product['description']}' 
+                WHERE id='{$product['id']}'";
+    }
+    
+    return mysqli_query($con, $sql);
+}
+
+function getTotalProducts(){
+    $con = getConnection();
+    $sql = "SELECT count(*) as count FROM products";
+    $result = mysqli_query($con, $sql);
+    $row = mysqli_fetch_assoc($result);
+    return $row['count'];
+}
 ?>

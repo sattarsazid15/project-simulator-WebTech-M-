@@ -2,32 +2,75 @@
 session_start();
 require_once('../models/productModel.php');
 
+
+if (!isset($_SESSION['admin']) && !isset($_COOKIE['admin_status'])) {
+    header("Location: admin_login.php");
+    exit;
+}
+
 $result = getAllProducts();
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>All Products</title>
+    <title>Manage Products</title>
+    <link rel="stylesheet" href="../assets/css/technician_dashboard.css">
+    <link rel="stylesheet" href="../assets/css/style1.css">
 </head>
 <body>
-<center>
-    <h2>Available Products</h2>
-    <a href="admin_dashboard.php">Back to Dashboard</a>
-    <br><br>
 
-    <?php while($row = mysqli_fetch_assoc($result)) { ?>
-        <div style="border:1px solid #ccc; padding:10px; margin:10px; display:inline-block; width:200px;">
-            <img src="../assets/uploads/<?php echo $row['image']; ?>" width="100" height="100"><br>
-            <b><?php echo $row['name']; ?></b><br>
-            Type: <?php echo $row['type']; ?><br>
-            Price: $<?php echo $row['price']; ?><br><br>
-            <a href="product_details.php?id=<?php echo $row['id']; ?>"><button>View Details / Buy</button></a>
-                <button type="button" onclick="alert('Added to Cart!')">Add to Cart</button>
-            </form>
+<div class="header">
+    <h2>Admin Panel</h2>
+    <h1>Product Management</h1>
+</div>
+
+<div class="main-container">
+    
+    <div class="content-area" style="width: 100%;">
+        <div class="table-box">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ddd; padding-bottom: 10px;">
+        <h3>All Products List</h3>
+        <a href="add_product.php" class="btn" style="background-color: #28a745;">+ Add New Product</a>
+         </div>
+
+        <table>
+        <thead>
+            <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php while($row = mysqli_fetch_assoc($result)) { ?>
+                    <tr>
+                        <td>
+                            <img src="../assets/uploads/<?= $row['image']; ?>" width="60" height="60" style="object-fit: cover; border-radius: 4px;">
+                    </td>
+                    <td><?= $row['name']; ?></td>
+                    <td><?= $row['type']; ?></td>
+                    <td>Tk <?= $row['price']; ?></td>
+                    <td>
+                    <a href="edit_product.php?id=<?= $row['id']; ?>" class="btn-claim" style="background-color: #007bff; text-decoration:none;">Edit</a>
+                            
+                    <a href="../controllers/product_controller.php?delete=<?= $row['id']; ?>" 
+                    class="btn-claim" 
+                    style="background-color: #dc3545; text-decoration:none;"
+                    onclick="return confirm('Are you sure you want to delete this product?');">Delete</a>
+                    </td>
+                    </tr>
+                <?php } ?>
+                </tbody>
+            </table>
         </div>
-    <?php } ?>
+         <center>
+            <a href="admin_dashboard.php" class="btn">Back to Dashboard</a>
+        </center>
+    </div>
+</div>
 
-</center>
 </body>
 </html>
