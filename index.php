@@ -1,5 +1,20 @@
 <?php
 session_start();
+
+if(isset($_SESSION['admin']) || isset($_COOKIE['admin_status'])){
+    header("Location: views/adminDashboard.php");
+    exit;
+}
+
+if(isset($_SESSION['technician']) || isset($_COOKIE['tech_status'])){
+    header("Location: views/technicianDashboard.php");
+    exit;
+}
+
+if(isset($_SESSION['customer']) || isset($_COOKIE['status'])){
+    header("Location: views/customerDashboard.php");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -10,8 +25,7 @@ session_start();
 <body>
 
 <div class="home-wrapper">
-
-    <h1>Welcome To Online Mobile Shop & Servicing Center<h1>
+    <h1>Welcome To Online Mobile Shop & Servicing Center</h1>
     <h2>SELECT YOUR ROLES</h2>
 
     <div class="roles-bg"></div>
@@ -20,7 +34,6 @@ session_start();
         <a href="views/technicianLogin.php" class="role-btn">Technician</a>
         <a href="views/customerLogin.php" class="role-btn">Customer</a>
     </div>
-
 </div>
 
 </body>

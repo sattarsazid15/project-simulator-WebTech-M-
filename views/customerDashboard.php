@@ -65,7 +65,7 @@ if(isset($_GET['search']) && !empty($_GET['search'])){
                     <span class="product-price">Tk <?= $row['price']; ?></span><br><br>
 
                     <a href="productDetails.php?id=<?= $row['id']; ?>">
-                        <button>View Details / Buy</button>
+                        <button>View Details</button>
                     </a>
 
                     <form method="POST" action="../controllers/cartController.php" class="cart-form">

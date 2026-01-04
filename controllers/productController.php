@@ -5,9 +5,9 @@ require_once('../models/productModel.php');
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
     if(deleteProduct($id)){
-        header("Location: ../views/deleteProduct.php");
+        header("Location: ../views/productManagement.php");
     } else {
-        echo "Failed to delete product.";
+        echo "<script>alert('Failed to delete product.'); window.location='../views/productManagement.php';</script>";
     }
     exit;
 }
@@ -21,19 +21,16 @@ if (isset($_POST['update_product'])) {
     $description = isset($_POST['description']) ? $_POST['description'] : '';
     $imageName = "";
 
- 
     if($name == "" || $price == "" || $type == ""){
-        echo "Name, Price, and Type are required.";
+        echo "<script>alert('Name, Price, and Type are required.'); window.history.back();</script>";
         exit;
     }
 
-  
     if (isset($_FILES['image']['name']) && $_FILES['image']['name'] != "") {
         
         $src = $_FILES['image']['tmp_name'];
         $originalName = $_FILES['image']['name'];
 
-      
         $extArray = explode('.', $originalName);
         $index = count($extArray) - 1;
         $ext = strtolower($extArray[$index]);
@@ -41,7 +38,7 @@ if (isset($_POST['update_product'])) {
         $allowed_extensions = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
 
         if(!in_array($ext, $allowed_extensions)){
-            echo "Error: Invalid file type. Only JPG, PNG, WEBP, and GIF are allowed.";
+            echo "<script>alert('Error: Invalid file type.'); window.history.back();</script>";
             exit;
         }
 
@@ -49,7 +46,7 @@ if (isset($_POST['update_product'])) {
         $des = '../assets/uploads/' . $imageName;
 
         if(!move_uploaded_file($src, $des)) {
-            echo "Error uploading file.";
+            echo "<script>alert('Error uploading file.'); window.history.back();</script>";
             exit;
         }
     }
@@ -64,10 +61,9 @@ if (isset($_POST['update_product'])) {
     ];
 
     if(updateProduct($product)){
-        echo "Product updated successfully! <br>";
-        echo "<a href='../views/productManagement.php'>Back to Product List</a>";
+        header("Location: ../views/productManagement.php");
     } else {
-        echo "Error updating product.";
+        echo "<script>alert('Error updating product.'); window.history.back();</script>";
     }
     exit; 
 }
@@ -75,12 +71,12 @@ if (isset($_POST['update_product'])) {
 if (isset($_POST['type'])) {
     
     if($_POST['price'] == "" || $_POST['type'] == "" || $_POST['name'] == ""){
-        echo "Name, Price, and Type are required.";
+        echo "<script>alert('Name, Price, and Type are required.'); window.history.back();</script>";
         exit;
     }
 
     if (!isset($_FILES['image']['name']) || $_FILES['image']['name'] == "") {
-        echo "Error: Product Image is Mandatory.";
+        echo "<script>alert('Error: Product Image is Mandatory.'); window.history.back();</script>";
         exit;
     }
 
@@ -95,17 +91,15 @@ if (isset($_POST['type'])) {
     $allowed_extensions = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
 
     if(!in_array($ext, $allowed_extensions)){
-        echo "Error: Invalid file type. Only JPG, PNG, WEBP, and GIF are allowed.";
+        echo "<script>alert('Error: Invalid file type.'); window.history.back();</script>";
         exit;
     }
 
     $imageName = time() . "." . $ext; 
     $des = '../assets/uploads/' . $imageName;
 
-    if(move_uploaded_file($src, $des)) {
-        
-    } else {
-        echo "Error uploading file.";
+    if(!move_uploaded_file($src, $des)) {
+        echo "<script>alert('Error uploading file.'); window.history.back();</script>";
         exit;
     }
     
@@ -118,10 +112,9 @@ if (isset($_POST['type'])) {
     ];
 
     if(addProduct($product)){
-        echo "Product added successfully! <br>";
-        echo "<a href='../views/adminDashboard.php'>Back to Dashboard</a>";
+        header("Location: ../views/productManagement.php");
     } else {
-        echo "Error adding product to Database.";
+        echo "<script>alert('Error adding product to Database.'); window.history.back();</script>";
     }
 
 } else {

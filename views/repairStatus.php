@@ -43,7 +43,7 @@ $my_repairs = getRequestsByCustomer($_SESSION['customer']['id']);
                         <tr>
                             <td><?= $row['device_name']; ?></td>
                             <td><?= $row['issue_description']; ?></td>
-                            <td class="status-<?= substr($row['status'], 0, 2); ?>">
+                            <td class="status-<?= $row['status']; ?>">
                                 <?= $row['status']; ?>
                             </td>
                         </tr>
