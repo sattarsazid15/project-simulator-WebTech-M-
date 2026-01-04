@@ -18,16 +18,17 @@ $result = getAllCustomers();
 </head>
 <body>
 
-<div class="header">
+<div id="header">
     <h2>Admin Panel</h2>
     <h1>Manage Customers</h1>
 </div>
 
-<div class="main-container">
-    <div class="content-area">
-        <div class="table-box">
+<div id="main-container">
+    <div id="content-area">
+        
+        <div id="table-box">
             
-            <div class="table-header">
+            <div id="table-header">
                 <h3>Registered Customers</h3>
                 <a href="adminDashboard.php" class="btn" id="back-btn">&larr; Back</a>
             </div>
