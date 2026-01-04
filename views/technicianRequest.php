@@ -16,15 +16,15 @@ if(!isset($_SESSION['admin']) && !isset($_COOKIE['admin_status'])){
 </head>
 <body>
 
-<div class="header">
+<div id="header">
     <h2>Admin Panel</h2>
     <h1>Manage Technician Requests</h1>
 </div>
 
-<div class="main-container">
+<div id="main-container">
 
-    <div class="content-area">
-        <div class="request-box">
+    <div id="content-area">
+        <div id="request-box">
             <h3>Pending Technicians</h3>
 
             <table>
@@ -54,7 +54,7 @@ if(!isset($_SESSION['admin']) && !isset($_COOKIE['admin_status'])){
                     <?php 
                         }
                     } else {
-                        echo "<tr><td colspan='4' style='text-align:center; padding:20px; color:#666;'>No pending technician requests.</td></tr>";
+                        echo "<tr><td colspan='4' class='no-data'>No pending technician requests.</td></tr>";
                     }
                     ?>
                 </tbody>
@@ -62,9 +62,13 @@ if(!isset($_SESSION['admin']) && !isset($_COOKIE['admin_status'])){
         </div>
     </div>
 
-    <div class="side-panel">
+    <div id="side-panel">
         <a href="adminDashboard.php" class="side-btn">Dashboard 🏠</a>
+        <a href="technicianRequest.php" class="side-btn" id="active-btn">Technician Request 🛠️</a>
         <a href="products.php" class="side-btn">Manage Products 📦</a>
+        <a href="adminOrders.php" class="side-btn">Manage Orders 🚚</a>
+        <a href="adminCustomers.php" class="side-btn">Manage Customers 👥</a>
+        <a href="adminTechnicians.php" class="side-btn">Manage Technicians 👨‍🔧</a>
         <a href="../controllers/logout.php" class="side-btn logout">Logout ➜</a>
     </div>
 

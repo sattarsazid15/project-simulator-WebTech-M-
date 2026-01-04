@@ -28,15 +28,15 @@ $result = getAllOrders();
 </head>
 <body>
 
-<div class="header">
+<div id="header">
     <h2>Admin Panel</h2>
     <h1>Order Management</h1>
 </div>
 
-<div class="main-container">
+<div id="main-container">
 
-    <div class="content-area">
-        <div class="table-box">
+    <div id="content-area">
+        <div id="table-box">
             <h3>Customer Orders List</h3>
 
             <table>
@@ -57,7 +57,7 @@ $result = getAllOrders();
                             <td>#<?= $row['id']; ?></td>
                             <td>
                                 <b><?= $row['customer_name']; ?></b><br>
-                                <span style="font-size:0.9em; color:#666;"><?= $row['address']; ?></span>
+                                <span class="customer-address"><?= $row['address']; ?></span>
                             </td>
                             <td><?= $row['contact']; ?></td>
                             <td><?= $row['total_amount']; ?></td>
@@ -76,17 +76,20 @@ $result = getAllOrders();
                             <td class="status-<?= $row['status']; ?>"><?= $row['status']; ?></td>
                         </tr>
                     <?php } } else { ?>
-                        <tr><td colspan="6" style="text-align:center;">No orders found.</td></tr>
+                        <tr><td colspan="6" class="text-center">No orders found.</td></tr>
                     <?php } ?>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <div class="side-panel">
+    <div id="side-panel">
         <a href="adminDashboard.php" class="side-btn">Dashboard 🏠</a>
-        <a href="products.php" class="side-btn">Manage Products 📦</a>
         <a href="technicianRequest.php" class="side-btn">Technician Request 🛠️</a>
+        <a href="productManagement.php" class="side-btn">Manage Products 📦</a>
+        <a href="adminOrders.php" class="side-btn" id="active-btn">Manage Orders 🚚</a>
+        <a href="adminCustomers.php" class="side-btn">Manage Customers 👥</a>
+        <a href="adminTechnicians.php" class="side-btn">Manage Technicians 👨‍🔧</a>
         <a href="../controllers/logout.php" class="side-btn logout">Logout ➜</a>
     </div>
 

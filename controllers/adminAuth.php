@@ -43,7 +43,6 @@ if(isset($_GET['delete_customer'])){
     }
 }
 
-// --- TECHNICIAN MANAGEMENT ---
 if(isset($_POST['update_technician_admin'])){
     $id = $_POST['id'];
     $username = $_POST['username'];

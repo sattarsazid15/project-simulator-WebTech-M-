@@ -14,19 +14,24 @@ $result = getAllCustomers();
 <html>
 <head>
     <title>Manage Customers</title>
-    <link rel="stylesheet" href="../assets/css/products.css"> </head>
+    <link rel="stylesheet" href="../assets/css/productManagement.css"> 
+</head>
 <body>
+
 <div class="header">
     <h2>Admin Panel</h2>
     <h1>Manage Customers</h1>
 </div>
+
 <div class="main-container">
     <div class="content-area">
         <div class="table-box">
+            
             <div class="table-header">
                 <h3>Registered Customers</h3>
-                <a href="adminDashboard.php" class="btn" style="background-color: #6c757d;">&larr; Back</a>
+                <a href="adminDashboard.php" class="btn" id="back-btn">&larr; Back</a>
             </div>
+
             <table>
                 <thead>
                     <tr>

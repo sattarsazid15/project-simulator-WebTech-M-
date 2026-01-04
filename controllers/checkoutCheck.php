@@ -1,50 +1,76 @@
-<?php 
-    session_start();
-    require_once('../models/orderModel.php');
+<?php
+session_start();
+require_once('../models/orderModel.php');
+require_once('../models/productModel.php');
 
-    if(isset($_REQUEST['submit'])){
+if(!isset($_SESSION['customer'])){
+    header("Location: ../views/customerLogin.php");
+    exit();
+}
 
-        $fullname = $_REQUEST['fullname'];
-        $contact = $_REQUEST['contact'];
-        $address = $_REQUEST['address'];
-        $payment_method = $_REQUEST['payment_method'];
+if(isset($_POST['submit'])){
 
-        if($fullname == "" || $contact == "" || $address == "" || $payment_method == ""){
-            echo "Please fill all the fields!";
-        } else {
-            
-            $total = 0;
-            if(isset($_SESSION['cart'])){
-                foreach($_SESSION['cart'] as $item){
-                    $total += $item['price'] * $item['qty'];
-                }
-            }
+    $fullname = $_POST['fullname'];
+    $contact = $_POST['contact'];
+    $address = $_POST['address'];
+    $payment = $_POST['payment_method'];
+    $total_amount = $_POST['total_amount'];
 
-            $order = [
-                'customer_name' => $fullname,
-                'contact' => $contact,
-                'address' => $address,
-                'total_amount' => $total
-            ];
+    if(empty($fullname) || empty($contact) || empty($address) || empty($payment)){
+        echo "<script>alert('Please fill in all shipping details.'); window.history.back();</script>";
+        exit();
+    }
 
-            $order_id = addOrder($order);
+    if(!is_numeric($contact) || strlen($contact) != 11) {
+        echo "<script>alert('Invalid contact number! It must be exactly 11 digits.'); window.history.back();</script>";
+        exit();
+    }
 
-            if($order_id){
-                $_SESSION['current_order'] = $order;
-                $_SESSION['current_order']['order_id'] = $order_id;
-                $_SESSION['current_order']['items'] = $_SESSION['cart'];
-                $_SESSION['current_order']['date'] = date("Y-m-d");
-                $_SESSION['current_order']['payment_method'] = $payment_method;
+    $orderData = [
+        'customer_id' => $_SESSION['customer']['id'],
+        'customer_name' => $fullname,
+        'contact' => $contact,
+        'address' => $address,
+        'total_amount' => $total_amount,
+        'status' => 'Pending',
+        'payment_method' => $payment
+    ];
 
-                unset($_SESSION['cart']);
-                
-                header('location: ../views/invoice.php');
-            } else {
-                echo "Error placing order in Database.";
+    $order_id = addOrder($orderData);
+
+    if($order_id){
+        $invoiceItems = [];
+        foreach($_SESSION['cart'] as $id => $qty){
+            $product = getProductById($id);
+            if($product){
+                $invoiceItems[] = [
+                    'name' => $product['name'],
+                    'price' => $product['price'],
+                    'qty' => $qty
+                ];
             }
         }
 
+        $_SESSION['current_order'] = [
+            'order_id' => $order_id,
+            'date' => date("Y-m-d H:i:s"),
+            'customer_name' => $fullname,
+            'contact' => $contact,
+            'address' => $address,
+            'payment_method' => $payment,
+            'total_amount' => $total_amount,
+            'items' => $invoiceItems
+        ];
+
+        unset($_SESSION['cart']);
+        header("Location: ../views/invoice.php");
+        exit();
+
     } else {
-        header('location: ../views/checkout.php');
+        echo "Error placing order.";
     }
+
+} else {
+    header("Location: ../views/checkout.php");
+}
 ?>

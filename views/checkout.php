@@ -15,52 +15,35 @@ $total_price = 0;
 <html>
 <head>
     <title>Checkout</title>
-    <link rel="stylesheet" href="../assets/css/technicianDashboard.css">
-    <link rel="stylesheet" href="../assets/css/style1.css">
-    <style>
-        .checkout-container {
-            width: 80%;
-            margin: 30px auto;
-            background: white;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .qty-input {
-            width: 50px;
-            padding: 5px;
-            text-align: center;
-        }
-        .total-row {
-            font-size: 1.2em;
-            font-weight: bold;
-            background-color: #eee;
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/css/checkout.css">
+    <script src="../assets/js/validation.js"></script>
 </head>
 <body>
 
-<div class="header">
+<div id="header">
     <h2>Checkout</h2>
     <h1>Review Your Order</h1>
 </div>
 
-<div class="main-container" style="display:block;">
-    <div class="checkout-container">
-        <a href="customerDashboard.php" class="btn">Back to Shopping</a>
-        <br><br>
-
+<div id="checkout-wrapper">
+    <div id="checkout-box">
+        
         <?php if(empty($cart)) { ?>
-            <center>
+            <div id="empty-cart">
                 <h3>Your cart is empty.</h3>
-                <br>
-                <a href="customerDashboard.php" class="btn" style="background:#28a745;">Browse Products</a>
-            </center>
+                <a href="customerDashboard.php" class="btn btn-shop">Browse Products</a>
+            </div>
         <?php } else { ?>
+
+            <div id="checkout-header">
+                <h3>Shopping Cart</h3>
+                <a href="customerDashboard.php" class="btn btn-back">&larr; Continue Shopping</a>
+            </div>
 
             <table>
                 <thead>
                     <tr>
-                        <th>Product</th>
+                        <th class="col-product">Product</th>
                         <th>Price</th>
                         <th>Quantity (Max 5)</th>
                         <th>Subtotal</th>
@@ -78,12 +61,17 @@ $total_price = 0;
                     ?>
                     <tr>
                         <td>
-                            <img src="../assets/uploads/<?= $product['image']; ?>" width="50" style="vertical-align:middle;">
-                            <?= $product['name']; ?>
+                            <div class="product-info">
+                                <img src="../assets/uploads/<?= $product['image']; ?>" alt="img">
+                                <div>
+                                    <strong><?= $product['name']; ?></strong><br>
+                                    <small style="color:#666;"><?= $product['type']; ?></small>
+                                </div>
+                            </div>
                         </td>
                         <td>Tk <?= $product['price']; ?></td>
                         <td>
-                            <form method="POST" action="../controllers/cartController.php" style="display:inline;">
+                            <form method="POST" action="../controllers/cartController.php">
                                 <input type="hidden" name="update_qty" value="true">
                                 <input type="hidden" name="id" value="<?= $id; ?>">
                                 <input type="number" name="qty" value="<?= $qty; ?>" min="1" max="5" class="qty-input" onchange="this.form.submit()">
@@ -91,25 +79,55 @@ $total_price = 0;
                         </td>
                         <td>Tk <?= $subtotal; ?></td>
                         <td>
-                            <a href="../controllers/cartController.php?remove=<?= $id; ?>" style="color:red; font-weight:bold;">Remove</a>
+                            <a href="../controllers/cartController.php?remove=<?= $id; ?>" class="remove-link">Remove</a>
                         </td>
                     </tr>
                     <?php } ?>
                     
-                    <tr class="total-row">
-                        <td colspan="3" style="text-align:right;">Grand Total:</td>
+                    <tr id="total-row">
+                        <td colspan="3" class="text-right">Grand Total:</td>
                         <td colspan="2">Tk <?= $total_price; ?></td>
                     </tr>
                 </tbody>
             </table>
 
             <br>
-            <div style="text-align: right;">
-                <form action="../controllers/orderController.php" method="POST">
-                    <input type="hidden" name="total_amount" value="<?= $total_price; ?>">
-                    <button type="button" class="btn" style="background:#28a745; font-size:1.2em;" onclick="alert('Payment Gateway Integration Coming Soon!')">Proceed to Payment</button>
-                </form>
-            </div>
+            <hr class="divider">
+            <br>
+
+            <h3>Shipping & Payment Details</h3>
+            
+            <form method="POST" action="../controllers/checkoutCheck.php" id="checkout-form" onsubmit="return validateCheckout()">
+                <input type="hidden" name="total_amount" value="<?= $total_price; ?>">
+                
+                <div class="form-group">
+                    <label>Full Name:</label>
+                    <input type="text" name="fullname" value="<?= $_SESSION['customer']['username']; ?>" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Contact No:</label>
+                    <input type="text" name="contact" id="contact" required placeholder="e.g. 017XXXXXXXX">
+                </div>
+
+                <div class="form-group">
+                    <label>Address:</label>
+                    <textarea name="address" rows="3" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Payment Method:</label>
+                    <select name="payment_method" required>
+                        <option value="">Select Method</option>
+                        <option value="COD">Cash on Delivery</option>
+                        <option value="Online" disabled>Online Payment (Coming Soon)</option>
+                    </select>
+                </div>
+
+                <div id="form-actions">
+                    <input type="submit" name="submit" value="Confirm Order" class="btn btn-payment">
+                </div>
+            </form>
 
         <?php } ?>
     </div>

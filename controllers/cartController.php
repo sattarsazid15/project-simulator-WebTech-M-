@@ -9,13 +9,17 @@ if(!isset($_SESSION['cart'])){
 if(isset($_POST['action']) && $_POST['action'] == 'add'){
     
     $id = $_POST['id'];
+    $quantityToAdd = isset($_POST['qty']) ? (int)$_POST['qty'] : 1;
     
-   
+    if($quantityToAdd < 1) $quantityToAdd = 1;
+
     if(isset($_SESSION['cart'][$id])){
-        if($_SESSION['cart'][$id] < 5){
-            $_SESSION['cart'][$id]++;
+        $newQty = $_SESSION['cart'][$id] + $quantityToAdd;
+
+        if($newQty <= 5){
+            $_SESSION['cart'][$id] = $newQty;
             echo "<script>
-                    alert('Item quantity increased!'); 
+                    alert('Item quantity updated!'); 
                     window.location.href = '../views/customerDashboard.php';
                   </script>";
         } else {
@@ -25,22 +29,26 @@ if(isset($_POST['action']) && $_POST['action'] == 'add'){
                   </script>";
         }
     } else {
-       
-        $_SESSION['cart'][$id] = 1;
-        echo "<script>
-                alert('Added to cart!'); 
-                window.location.href = '../views/customerDashboard.php';
-              </script>";
+        if($quantityToAdd <= 5){
+            $_SESSION['cart'][$id] = $quantityToAdd;
+            echo "<script>
+                    alert('Added to cart!'); 
+                    window.location.href = '../views/customerDashboard.php';
+                  </script>";
+        } else {
+            echo "<script>
+                    alert('You cannot add more than 5 items at once.'); 
+                    window.location.href = '../views/productDetails.php?id=$id';
+                  </script>";
+        }
     }
     exit;
 }
-
 
 if(isset($_POST['update_qty'])){
     $id = $_POST['id'];
     $qty = (int)$_POST['qty'];
 
-    
     if($qty < 1) $qty = 1;
     if($qty > 5) $qty = 5; 
 
@@ -50,15 +58,12 @@ if(isset($_POST['update_qty'])){
     exit;
 }
 
-
 if(isset($_GET['remove'])){
     $id = $_GET['remove'];
     unset($_SESSION['cart'][$id]);
-    
     header("Location: ../views/checkout.php");
     exit;
 }
-
 
 if(isset($_GET['clear'])){
     unset($_SESSION['cart']);

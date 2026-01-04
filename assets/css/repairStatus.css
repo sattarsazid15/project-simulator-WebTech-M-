@@ -31,44 +31,6 @@ body {
     padding-right: 20px;
 }
 
-#stats-grid {
-    display: flex;
-    gap: 40px;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.stat-card {
-    color: #fff;
-    padding: 30px;
-    width: 260px;
-    text-align: center;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
-}
-
-.stat-card:hover {
-    transform: translateY(-5px);
-}
-
-.stat-card h3 {
-    font-size: 1.1em;
-    margin-bottom: 10px;
-    opacity: 0.9;
-}
-
-.stat-card h2 {
-    font-size: 2.5em;
-    font-weight: bold;
-}
-
-.card-customers { background-color: #7a3200; }
-.card-technicians { background-color: #4f93d2; }
-.card-products { background-color: #d974d1; }
-.card-earnings { background-color: #0f4d1a; }
-
 #side-panel {
     width: 220px;
     position: fixed;
@@ -92,3 +54,51 @@ body {
 
 .side-btn:hover { background-color: #419feb; }
 .logout { background-color: #b7d7f2; }
+
+#active-btn {
+    background-color: #419feb;
+}
+
+#status-box {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    min-height: 400px;
+}
+
+#status-header {
+    border-bottom: 2px solid #155f7d;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f8f9fa;
+    color: #333;
+    font-weight: bold;
+}
+
+.status-Pending { color: orange; font-weight: bold; }
+.status-In { color: blue; font-weight: bold; }
+.status-Completed { color: green; font-weight: bold; }
+
+.no-data {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-style: italic;
+}

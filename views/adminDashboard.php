@@ -25,15 +25,17 @@ $earnings = getTotalEarnings();
 </head>
 <body>
 
-<div class="header">
+<div id="header">
     <h2>Welcome Admin</h2>
     <h1>Online Mobile Shop and Servicing Center</h1>
 </div>
 
-<div class="main-container">
+<div id="main-container">
 
-    <div class="content-area">
-        <div class="stats-grid">
+    <div id="content-area">
+        
+        <div id="stats-grid">
+            
             <div class="stat-card card-customers">
                 <h3>Total Customer Count</h3>
                 <h2><?= $customerCount ?></h2>
@@ -50,12 +52,13 @@ $earnings = getTotalEarnings();
                 <h3>Total Earnings</h3>
                 <h2>TK <?= $earnings ?></h2>
             </div>
+
         </div>
     </div>
 
-    <div class="side-panel">
+    <div id="side-panel">
         <a href="technicianRequest.php" class="side-btn">Technician Request 🛠️</a>
-        <a href="products.php" class="side-btn">Manage Products 📦</a>
+        <a href="productManagement.php" class="side-btn">Manage Products 📦</a>
         <a href="adminOrders.php" class="side-btn">Manage Orders 🚚</a>
         <a href="adminCustomers.php" class="side-btn">Manage Customers 👥</a>
         <a href="adminTechnicians.php" class="side-btn">Manage Technicians 👨‍🔧</a>

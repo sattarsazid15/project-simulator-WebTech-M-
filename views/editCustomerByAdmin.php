@@ -21,21 +21,30 @@ $user = getUserById($_GET['id']);
     <link rel="stylesheet" href="../assets/css/productForm.css">
 </head>
 <body>
-<div class="form-container">
+
+<div class="form-container" id="edit-customer-container">
     <h2>Edit Customer</h2>
-    <form method="post" action="../controllers/adminAuth.php">
+    
+    <form method="post" action="../controllers/adminAuth.php" id="edit-customer-form">
         <input type="hidden" name="id" value="<?= $user['id']; ?>">
+        
         <div class="form-group">
-            <label>Username</label>
-            <input type="text" name="username" value="<?= $user['username']; ?>" required>
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" value="<?= $user['username']; ?>" required>
         </div>
+        
         <div class="form-group">
-            <label>Email</label>
-            <input type="email" name="email" value="<?= $user['email']; ?>" required>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" value="<?= $user['email']; ?>" required>
         </div>
-        <button type="submit" name="update_customer_admin">Update Customer</button>
+        
+        <button type="submit" name="update_customer_admin" id="update-btn">Update Customer</button>
     </form>
-    <div class="form-footer"><a href="adminCustomers.php">Cancel</a></div>
+    
+    <div class="form-footer" id="form-footer">
+        <a href="adminCustomers.php" id="cancel-link">Cancel</a>
+    </div>
 </div>
+
 </body>
 </html>

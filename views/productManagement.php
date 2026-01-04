@@ -14,27 +14,27 @@ $result = getAllProducts();
 <html>
 <head>
     <title>Manage Products</title>
-    <link rel="stylesheet" href="../assets/css/products.css">
+    <link rel="stylesheet" href="../assets/css/productManagement.css">
 </head>
 <body>
 
-<div class="header">
+<div id="header">
     <h2>Admin Panel</h2>
     <h1>Product Management</h1>
 </div>
 
-<div class="main-container">
+<div id="main-container">
     
-    <div class="content-area">
-        <div class="table-box">
+    <div id="content-area">
+        <div id="table-box">
             
-            <div class="table-header" style="display: flex; justify-content: space-between; align-items: center;">
-            <h3>All Products List</h3>
-            <div>
-                <a href="adminDashboard.php" class="btn" style="background-color: #6c757d; margin-right: 10px;">&larr; Back to Dashboard</a>
-                <a href="addProduct.php" class="btn btn-add">+ Add New Product</a>
+            <div id="table-header">
+                <h3>All Products List</h3>
+                <div>
+                    <a href="adminDashboard.php" class="btn" id="back-btn">&larr; Back to Dashboard</a>
+                    <a href="addProduct.php" class="btn btn-add">+ Add New Product</a>
+                </div>
             </div>
-        </div>
 
             <table>
                 <thead>
@@ -50,7 +50,7 @@ $result = getAllProducts();
                     <?php while($row = mysqli_fetch_assoc($result)) { ?>
                     <tr>
                         <td>
-                            <img src="../assets/uploads/<?= $row['image']; ?>" width="60" height="60" style="object-fit: cover; border-radius: 4px;">
+                            <img src="../assets/uploads/<?= $row['image']; ?>" alt="Product">
                         </td>
                         <td><?= $row['name']; ?></td>
                         <td><?= $row['type']; ?></td>

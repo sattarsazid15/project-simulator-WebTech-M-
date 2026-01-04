@@ -14,20 +14,24 @@ $result = getAllApprovedTechnicians();
 <html>
 <head>
     <title>Manage Technicians</title>
-    <link rel="stylesheet" href="../assets/css/products.css">
+    <link rel="stylesheet" href="../assets/css/productManagement.css">
 </head>
 <body>
-<div class="header">
+
+<div id="header">
     <h2>Admin Panel</h2>
     <h1>Manage Technicians</h1>
 </div>
-<div class="main-container">
-    <div class="content-area">
-        <div class="table-box">
-            <div class="table-header">
+
+<div id="main-container">
+    <div id="content-area">
+        <div id="table-box">
+            
+            <div id="table-header">
                 <h3>Technician List</h3>
-                <a href="adminDashboard.php" class="btn" style="background-color: #6c757d;">&larr; Back</a>
+                <a href="adminDashboard.php" class="btn" id="back-btn">&larr; Back</a>
             </div>
+
             <table>
                 <thead>
                     <tr>

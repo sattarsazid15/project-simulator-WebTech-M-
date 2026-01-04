@@ -21,25 +21,35 @@ $tech = getTechnicianById($_GET['id']);
     <link rel="stylesheet" href="../assets/css/productForm.css">
 </head>
 <body>
-<div class="form-container">
+
+<div class="form-container" id="edit-technician-container">
     <h2>Edit Technician</h2>
-    <form method="post" action="../controllers/adminAuth.php">
+
+    <form method="post" action="../controllers/adminAuth.php" id="edit-technician-form">
         <input type="hidden" name="id" value="<?= $tech['id']; ?>">
+        
         <div class="form-group">
-            <label>Username</label>
-            <input type="text" name="username" value="<?= $tech['username']; ?>" required>
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" value="<?= $tech['username']; ?>" required>
         </div>
+        
         <div class="form-group">
-            <label>Email</label>
-            <input type="email" name="email" value="<?= $tech['email']; ?>" required>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" value="<?= $tech['email']; ?>" required>
         </div>
+        
         <div class="form-group">
-            <label>Specialization</label>
-            <input type="text" name="specialization" value="<?= $tech['specialization']; ?>" required>
+            <label for="specialization">Specialization</label>
+            <input type="text" name="specialization" id="specialization" value="<?= $tech['specialization']; ?>" required>
         </div>
-        <button type="submit" name="update_technician_admin">Update Technician</button>
+        
+        <button type="submit" name="update_technician_admin" id="update-btn">Update Technician</button>
     </form>
-    <div class="form-footer"><a href="adminTechnicians.php">Cancel</a></div>
+    
+    <div class="form-footer" id="form-footer">
+        <a href="adminTechnicians.php" id="cancel-link">Cancel</a>
+    </div>
 </div>
+
 </body>
 </html>

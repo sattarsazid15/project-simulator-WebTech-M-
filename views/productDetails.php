@@ -2,35 +2,67 @@
 session_start();
 require_once('../models/productModel.php');
 
-if(!isset($_GET['id'])) header("Location: customer_products.php");
+if(!isset($_SESSION['customer']) && !isset($_COOKIE['status'])){
+    header("Location: customerLogin.php");
+    exit();
+}
+
+if(!isset($_GET['id'])) {
+    header("Location: customerDashboard.php");
+    exit();
+}
+
 $product = getProductById($_GET['id']);
+
+if(!$product){
+    echo "Product not found.";
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
 <html>
-<head><title><?php echo $product['name']; ?></title></head>
+<head>
+    <title><?= $product['name']; ?> - Details</title>
+    <link rel="stylesheet" href="../assets/css/productDetails.css">
+</head>
 <body>
-<center>
-    <h2><?php echo $product['name']; ?></h2>
-    <img src="../assets/uploads/<?php echo $product['image']; ?>" width="200"><br>
+
+<div id="header">
+    <h2>Welcome <?= $_SESSION['customer']['username']; ?></h2>
+    <h1>Online Mobile Shop</h1>
+</div>
+
+<div id="details-container">
     
-    <h3>Price: <?php echo $product['price']; ?> Tk</h3>
-    <p><b>Type:</b> <?php echo $product['type']; ?></p>
-    <p><b>Description:</b><br><?php echo $product['description']; ?></p>
+    <div id="product-image-box">
+        <img src="../assets/uploads/<?= $product['image']; ?>" alt="Product Image">
+    </div>
 
-    <br>
-    <form method="POST" action="../controllers/cartController.php">
-        <input type="hidden" name="id" value="<?php echo $product['id']; ?>">
-        <input type="hidden" name="name" value="<?php echo $product['name']; ?>">
-        <input type="hidden" name="price" value="<?php echo $product['price']; ?>">
+    <div id="product-info-box">
+        <h2><?= $product['name']; ?></h2>
         
-        Quantity: <input type="number" name="qty" value="1" min="1" max="10">
-        <br><br>
-        <button type="submit" name="add_to_cart">Add to Cart</button>
-    </form>
+        <div class="product-price">Tk <?= $product['price']; ?></div>
+        
+        <div class="product-desc">
+            <strong>Description:</strong><br>
+            <?= nl2br($product['description']); ?>
+        </div>
 
-    <br>
-    <a href="customer_products.php">Back to Products</a>
-</center>
+        <form method="POST" action="../controllers/cartController.php" id="add-to-cart-form">
+            <input type="hidden" name="action" value="add"> 
+            <input type="hidden" name="id" value="<?= $product['id']; ?>">
+            
+            <label for="qty"><strong>Qty:</strong></label>
+            <input type="number" name="qty" id="qty" value="1" min="1" max="5" class="qty-input">
+            
+            <button type="submit" id="add-cart-btn">Add to Cart</button>
+        </form>
+
+        <a href="customerDashboard.php" class="btn-back">&larr; Back to Products</a>
+    </div>
+
+</div>
+
 </body>
 </html>

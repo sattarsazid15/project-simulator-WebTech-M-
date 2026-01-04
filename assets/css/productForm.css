@@ -54,6 +54,13 @@ input:focus, select:focus, textarea:focus {
     box-shadow: 0 0 5px rgba(13, 110, 253, 0.2);
 }
 
+#current-image {
+    width: 100px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
 button {
     width: 100%;
     padding: 12px;

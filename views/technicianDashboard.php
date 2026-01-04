@@ -19,21 +19,21 @@ $my_requests = getRequestsByTechnician($_SESSION['technician']['id']);
 </head>
 <body>
 
-<div class="header">
+<div id="header">
     <h2>Welcome, <?= $_SESSION['technician']['username']; ?></h2>
     <h1>Technician Panel</h1>
 </div>
 
-<div class="main-container">
+<div id="main-container">
 
-    <div class="content-area">
+    <div id="content-area">
         
         <div class="table-box">
             <h3>Available Repair Requests (Pending)</h3>
             <table>
                 <thead>
                     <tr>
-                        <th>Device</th>
+                        <th>Customer</th> <th>Device</th>
                         <th>Issue</th>
                         <th>Date</th>
                         <th>Action</th>
@@ -43,18 +43,27 @@ $my_requests = getRequestsByTechnician($_SESSION['technician']['id']);
                     <?php if(mysqli_num_rows($pending_requests) > 0) { 
                         while($row = mysqli_fetch_assoc($pending_requests)) { ?>
                         <tr>
+                            <td>
+                                <strong><?= $row['username']; ?></strong><br>
+                                <small class="customer-email"><?= $row['email']; ?></small>
+                            </td>
                             <td><?= $row['device_name']; ?></td>
                             <td><?= $row['issue_description']; ?></td>
                             <td><?= $row['request_date']; ?></td>
-                            <td>
+                            <td class="action-buttons">
                                 <form method="POST" action="../controllers/repairStatusController.php">
                                     <input type="hidden" name="claim_id" value="<?= $row['id']; ?>">
-                                    <button type="submit" class="btn-claim">Claim Job</button>
+                                    <button type="submit" class="btn-claim">Claim</button>
+                                </form>
+
+                                <form method="POST" action="../controllers/repairStatusController.php">
+                                    <input type="hidden" name="reject_id" value="<?= $row['id']; ?>">
+                                    <button type="submit" class="btn-reject" onclick="return confirm('Reject this request? It will be removed from the list.');">Reject</button>
                                 </form>
                             </td>
                         </tr>
                     <?php } } else { ?>
-                        <tr><td colspan="4" style="text-align:center;">No pending requests available.</td></tr>
+                        <tr><td colspan="5" class="text-center">No pending requests available.</td></tr>
                     <?php } ?>
                 </tbody>
             </table>
@@ -86,7 +95,7 @@ $my_requests = getRequestsByTechnician($_SESSION['technician']['id']);
                             </td>
                         </tr>
                     <?php } } else { ?>
-                        <tr><td colspan="4" style="text-align:center;">You have no active jobs.</td></tr>
+                        <tr><td colspan="4" class="text-center">You have no active jobs.</td></tr>
                     <?php } ?>
                 </tbody>
             </table>
@@ -94,9 +103,9 @@ $my_requests = getRequestsByTechnician($_SESSION['technician']['id']);
 
     </div>
 
-    <div class="side-panel">
+    <div id="side-panel">
         <a href="technicianEditProfile.php" class="side-btn">Edit Profile 👤</a>
-        <a href="#" class="side-btn">My History 📜</a>
+        <a href="technicianHistory.php" class="side-btn">My History 📜</a>
         <a href="../controllers/logout.php" class="side-btn logout">Logout ➜</a>
     </div>
 
