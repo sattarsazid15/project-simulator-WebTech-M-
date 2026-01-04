@@ -51,6 +51,12 @@ if(isset($_POST['action']) && $_POST['action'] == "login"){
     if(loginUser($user)){
         $userData = getUserByEmail($user['email']);
 
+        unset($_SESSION['admin']);
+        unset($_SESSION['technician']);
+        unset($_SESSION['technician_logged_in']);
+        setcookie('admin_status', '', time()-3600, '/'); 
+        setcookie('tech_status', '', time()-3600, '/');
+
         $_SESSION['customer'] = [
             'id' => $userData['id'],
             'username' => $userData['username'],
@@ -63,7 +69,7 @@ if(isset($_POST['action']) && $_POST['action'] == "login"){
         exit;
 
     } else {
-        echo "Invalid Login Credentials.";
+        echo "<script>alert('Invalid Login Credentials.'); window.location='../views/customerLogin.php';</script>";
     }
 }
 ?>

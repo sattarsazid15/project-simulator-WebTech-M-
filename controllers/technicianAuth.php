@@ -14,27 +14,27 @@ if(isset($_POST['submit'])){
     $gender = isset($_POST['gender']) ? $_POST['gender'] : '';
 
     if(empty($email) || empty($username) || empty($password) || empty($specialist) || empty($experience) || empty($dob) || empty($shop) || empty($gender)){
-        echo "All fields are required.";
+        echo "<script>alert('All fields are required.'); window.history.back();</script>";
         exit;
     }
 
     if(strlen($username) < 2){
-        echo "Username must be at least 2 characters.";
+        echo "<script>alert('Username must be at least 2 characters.'); window.history.back();</script>";
         exit;
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "Invalid email format.";
+        echo "<script>alert('Invalid email format.'); window.history.back();</script>";
         exit;
     }
 
     if(strlen($password) < 6){
-        echo "Password must be at least 6 characters.";
+        echo "<script>alert('Password must be at least 6 characters.'); window.history.back();</script>";
         exit;
     }
 
     if(!is_numeric($experience)){
-        echo "Experience must be a number (years).";
+        echo "<script>alert('Experience must be a number (years).'); window.history.back();</script>";
         exit;
     }
 
@@ -50,10 +50,12 @@ if(isset($_POST['submit'])){
     ];
 
     if(addTechnician($tech)){
-        echo "Registration submitted. Wait for admin approval.<br>";
-        echo "<a href='../index.php'>Back to Home</a>";
+        echo "<script>
+                alert('Registration submitted successfully! Please wait for admin approval.'); 
+                window.location='../views/technicianLogin.php';
+              </script>";
     } else {
-        echo "Registration failed";
+        echo "<script>alert('Registration failed. Please try again.'); window.history.back();</script>";
     }
 
 } else {

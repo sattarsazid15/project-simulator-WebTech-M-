@@ -1,4 +1,15 @@
-<?php session_start(); ?>
+<?php 
+session_start(); 
+if(isset($_SESSION['customer']) || isset($_COOKIE['status'])){
+    header("Location: customerDashboard.php");
+    exit;
+}
+if(isset($_SESSION['technician']) || isset($_SESSION['admin'])){
+    session_unset();
+    session_destroy();
+    session_start();
+}
+?>
 
 <!DOCTYPE html>
 <html>
@@ -31,7 +42,7 @@
 
     <div class="form-footer">
         New user? <a href="customerSignup.php">Sign Up</a>
-        or, <a href="forgotPassword.php">Forgot Password?</a>
+        or <a href="forgotPassword.php">Forgot Password?</a>
     </div>
 </div>
 

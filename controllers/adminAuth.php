@@ -3,13 +3,24 @@ session_start();
 require_once('../models/userModel.php');
 require_once('../models/technicianModel.php');
 
-if ($_POST['username'] == "admin" && $_POST['password'] == "admin") {
-    $_SESSION['admin'] = true;
-    setcookie('admin_status', 'true', time()+3000, '/');
-    header("Location: ../views/adminDashboard.php");
-    exit();
-} else {
-    echo "Invalid admin login";
+if (isset($_POST['username']) && isset($_POST['password'])) {
+    if ($_POST['username'] == "admin" && $_POST['password'] == "admin") {
+        
+        unset($_SESSION['customer']);
+        unset($_SESSION['technician']);
+        unset($_SESSION['technician_logged_in']);
+        setcookie('status', '', time()-3600, '/'); 
+        setcookie('tech_status', '', time()-3600, '/');
+
+        $_SESSION['admin'] = true;
+        setcookie('admin_status', 'true', time()+3000, '/');
+        
+        header("Location: ../views/adminDashboard.php");
+        exit();
+    } else {
+        echo "<script>alert('Invalid Admin Credentials'); window.location='../views/adminLogin.php';</script>";
+        exit;
+    }
 }
 
 if(isset($_GET['approve'])){
@@ -64,3 +75,4 @@ if(isset($_GET['delete_technician'])){
         echo "Error deleting technician.";
     }
 }
+?>

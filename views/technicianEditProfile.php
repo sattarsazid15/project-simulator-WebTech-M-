@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(!isset($_SESSION['technician_logged_in'])){
+if(!isset($_SESSION['technician']) && !isset($_COOKIE['tech_status'])){
     header("Location: technicianLogin.php");
     exit;
 }
@@ -23,40 +23,40 @@ if(!isset($_SESSION['technician_logged_in'])){
 
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" name="username" id="username" value="<?= $_SESSION['technician']['username'] ?>">
+            <input type="text" name="username" id="username" value="<?= isset($_SESSION['technician']['username']) ? $_SESSION['technician']['username'] : '' ?>">
         </div>
 
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="text" name="email" id="email" value="<?= $_SESSION['technician']['email'] ?>">
+            <input type="text" name="email" id="email" value="<?= isset($_SESSION['technician']['email']) ? $_SESSION['technician']['email'] : '' ?>">
         </div>
 
         <div class="form-group">
             <label for="specialization">Specialization</label>
-            <input type="text" name="specialization" id="specialization" value="<?= $_SESSION['technician']['specialization'] ?>">
+            <input type="text" name="specialization" id="specialization" value="<?= isset($_SESSION['technician']['specialization']) ? $_SESSION['technician']['specialization'] : '' ?>">
         </div>
 
         <div class="form-group">
             <label for="experience">Experience (Years)</label>
-            <input type="number" name="experience" id="experience" value="<?= $_SESSION['technician']['experience'] ?>">
+            <input type="number" name="experience" id="experience" value="<?= isset($_SESSION['technician']['experience']) ? $_SESSION['technician']['experience'] : '' ?>">
         </div>
 
         <div class="form-group">
             <label for="dob">Date of Birth</label>
-            <input type="date" name="dob" id="dob" value="<?= $_SESSION['technician']['dob'] ?>">
+            <input type="date" name="dob" id="dob" value="<?= isset($_SESSION['technician']['dob']) ? $_SESSION['technician']['dob'] : '' ?>">
         </div>
 
         <div class="form-group">
             <label for="shop">Shop Name</label>
-            <input type="text" name="shop" id="shop" value="<?= $_SESSION['technician']['shop'] ?>">
+            <input type="text" name="shop" id="shop" value="<?= isset($_SESSION['technician']['shop_details']) ? $_SESSION['technician']['shop_details'] : '' ?>">
         </div>
 
         <div class="form-group">
             <label for="gender">Gender</label>
             <select name="gender" id="gender">
-                <option value="Male" <?= ($_SESSION['technician']['gender'] == 'Male') ? 'selected' : '' ?>>Male</option>
-                <option value="Female" <?= ($_SESSION['technician']['gender'] == 'Female') ? 'selected' : '' ?>>Female</option>
-                <option value="Other" <?= ($_SESSION['technician']['gender'] == 'Other') ? 'selected' : '' ?>>Other</option>
+                <option value="Male" <?= (isset($_SESSION['technician']['gender']) && $_SESSION['technician']['gender'] == 'Male') ? 'selected' : '' ?>>Male</option>
+                <option value="Female" <?= (isset($_SESSION['technician']['gender']) && $_SESSION['technician']['gender'] == 'Female') ? 'selected' : '' ?>>Female</option>
+                <option value="Other" <?= (isset($_SESSION['technician']['gender']) && $_SESSION['technician']['gender'] == 'Other') ? 'selected' : '' ?>>Other</option>
             </select>
         </div>
 
@@ -86,7 +86,7 @@ if(!isset($_SESSION['technician_logged_in'])){
     </form>
 
     <div class="form-footer">
-        <a href="technicianDashboard.php">Back To Menu </a>
+        <a href="technicianDashboard.php">Back To Menu</a>
     </div>
 </div>
 

@@ -92,9 +92,20 @@ th {
     font-weight: bold;
 }
 
-.status-Pending { color: orange; font-weight: bold; }
-.status-In { color: blue; font-weight: bold; }
-.status-Completed { color: green; font-weight: bold; }
+.status-Pending { 
+    color: orange; 
+    font-weight: bold; 
+}
+
+.status-In { 
+    color: blue; 
+    font-weight: bold; 
+}
+
+.status-Completed { 
+    color: green; 
+    font-weight: bold; 
+}
 
 .no-data {
     text-align: center;

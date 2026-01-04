@@ -61,6 +61,20 @@ function updateTechnicianEmail($id, $email){
     return mysqli_query($con, $sql);
 }
 
+function updateTechnicianFullProfile($id, $username, $email, $specialization, $experience, $dob, $gender, $shop_details){
+    $con = getConnection();
+    $sql = "UPDATE technicians SET 
+            username='{$username}', 
+            email='{$email}', 
+            specialization='{$specialization}', 
+            experience='{$experience}', 
+            dob='{$dob}', 
+            gender='{$gender}', 
+            shop_details='{$shop_details}' 
+            WHERE id={$id}";
+    return mysqli_query($con, $sql);
+}
+
 function changeTechnicianPassword($id, $old, $new){
     $con = getConnection();
     $check = "SELECT * FROM technicians 

@@ -1,3 +1,15 @@
+<?php
+session_start();
+if(isset($_SESSION['technician']) || isset($_COOKIE['tech_status'])){
+    header("Location: technicianDashboard.php");
+    exit;
+}
+if(isset($_SESSION['customer']) || isset($_SESSION['admin'])){
+    session_unset();
+    session_destroy();
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>

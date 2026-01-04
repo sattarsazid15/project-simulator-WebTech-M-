@@ -11,6 +11,11 @@ if(isset($_POST['email']) && isset($_POST['password'])){
 
         $tech = getTechnicianByEmail($email);
 
+        unset($_SESSION['admin']);
+        unset($_SESSION['customer']);
+        setcookie('admin_status', '', time()-3600, '/'); 
+        setcookie('status', '', time()-3600, '/');
+
         $_SESSION['technician_logged_in'] = true;
         $_SESSION['technician'] = $tech;
 
@@ -19,7 +24,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
         header("Location: ../views/technicianDashboard.php");
         exit;
     } else {
-        echo "Invalid credentials or not approved";
+        echo "<script>alert('Invalid credentials or account not approved yet.'); window.location='../views/technicianLogin.php';</script>";
     }
 } else {
     header("Location: ../views/technicianLogin.php");
