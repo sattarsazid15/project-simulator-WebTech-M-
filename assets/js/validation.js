@@ -182,3 +182,19 @@ function validateAdminLogin() {
     }
     return true;
 }
+
+function validateCheckout() {
+    var contact = document.getElementById("contact").value.trim();
+
+    if (contact === "") {
+        alert("Contact number is required");
+        return false;
+    }
+
+    if (isNaN(contact) || contact.length !== 11) {
+        alert("Contact number must be exactly 11 digits and contain only numbers.");
+        return false;
+    }
+
+    return true;
+}

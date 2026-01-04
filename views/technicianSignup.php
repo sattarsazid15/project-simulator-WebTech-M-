@@ -2,48 +2,48 @@
 <html>
 <head>
     <title>Technician Sign Up</title>
-    <link rel="stylesheet" href="../assets/css/style1.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <script src="../assets/js/validation.js"></script>
 </head>
 <body>
 
-<div class="form-container">
+<div class="form-container" id="tech-signup-container">
     <h2>Technician Sign Up</h2>
 
-    <form method="post" action="../controllers/technicianAuth.php" onsubmit="return validateTechSignup();">
+    <form method="post" action="../controllers/technicianAuth.php" onsubmit="return validateTechSignup();" id="tech-signup-form">
 
         <div class="form-group">
-            <label>Email</label>
+            <label for="email">Email</label>
             <input type="text" name="email" id="email">
         </div>
 
         <div class="form-group">
-            <label>Username</label>
+            <label for="username">Username</label>
             <input type="text" name="username" id="username">
         </div>
 
         <div class="form-group">
-            <label>Password</label>
+            <label for="password">Password</label>
             <input type="password" name="password" id="password">
         </div>
 
         <div class="form-group">
-            <label>Specialization</label>
+            <label for="specialist">Specialization</label>
             <input type="text" name="specialist" id="specialist">
         </div>
 
         <div class="form-group">
-            <label>Experience (years)</label>
+            <label for="experience">Experience (years)</label>
             <input type="text" name="experience" id="experience">
         </div>
 
         <div class="form-group">
-            <label>Date of Birth</label>
+            <label for="dob">Date of Birth</label>
             <input type="date" name="dob" id="dob">
         </div>
 
         <div class="form-group">
-            <label>Gender</label>
+            <label for="gender">Gender</label>
             <select name="gender" id="gender">
                 <option value="">Select</option>
                 <option value="Male">Male</option>
@@ -52,11 +52,11 @@
         </div>
 
         <div class="form-group">
-            <label>Shop Details</label>
+            <label for="shop">Shop Details</label>
             <input type="text" name="shop" id="shop">
         </div>
 
-        <button type="submit" name="submit">Submit</button>
+        <button type="submit" name="submit" id="signup-btn">Submit</button>
     </form>
 
     <div class="form-footer">

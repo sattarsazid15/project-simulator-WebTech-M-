@@ -4,29 +4,29 @@
 <html>
 <head>
     <title>Customer Login</title>
-    <link rel="stylesheet" href="../assets/css/style1.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <script src="../assets/js/validation.js"></script>
 </head>
 <body>
 
-<div class="form-container">
+<div class="form-container" id="customer-login-container">
     <h2>Customer Login</h2>
 
-    <form method="post" action="../controllers/customerAuth.php" onsubmit="return validateLogin();">
+    <form method="post" action="../controllers/customerAuth.php" onsubmit="return validateLogin();" id="customer-login-form">
 
         <input type="hidden" name="action" value="login">
 
         <div class="form-group">
-            <label>Email</label>
+            <label for="login_email">Email</label>
             <input type="text" name="email" id="login_email">
         </div>
 
         <div class="form-group">
-            <label>Password</label>
+            <label for="login_password">Password</label>
             <input type="password" name="password" id="login_password">
         </div>
 
-        <button type="submit">Login</button>
+        <button type="submit" id="login-btn">Login</button>
     </form>
 
     <div class="form-footer">

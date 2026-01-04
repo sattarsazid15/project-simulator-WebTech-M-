@@ -65,7 +65,7 @@ if (isset($_POST['update_product'])) {
 
     if(updateProduct($product)){
         echo "Product updated successfully! <br>";
-        echo "<a href='../views/products.php'>Back to Product List</a>";
+        echo "<a href='../views/productManagement.php'>Back to Product List</a>";
     } else {
         echo "Error updating product.";
     }

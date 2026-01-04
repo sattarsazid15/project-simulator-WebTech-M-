@@ -3,20 +3,21 @@ require_once('db.php');
 
 function addOrder($order){
     $con = getConnection();
-    $sql = "INSERT INTO orders (customer_name, contact, address, total_amount, status) 
+    $sql = "INSERT INTO orders (customer_id, customer_name, contact, address, total_amount, status, payment_method) 
             VALUES (
+                '{$order['customer_id']}', 
                 '{$order['customer_name']}', 
                 '{$order['contact']}', 
                 '{$order['address']}', 
                 '{$order['total_amount']}', 
-                'Pending'
+                '{$order['status']}', 
+                '{$order['payment_method']}'
             )";
     
     if(mysqli_query($con, $sql)){
         return mysqli_insert_id($con);
-    } else {
-        return false;
     }
+    return false;
 }
 
 function getAllOrders(){
@@ -35,7 +36,7 @@ function getTotalEarnings(){
 
 function updateOrderStatus($id, $status){
     $con = getConnection();
-    $sql = "UPDATE orders SET status='{$status}' WHERE id={$id}";
+    $sql = "UPDATE orders SET status='{$status}' WHERE id='{$id}'";
     return mysqli_query($con, $sql);
 }
 ?>

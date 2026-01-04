@@ -1,70 +1,75 @@
 <?php 
-    session_start();
+session_start();
 
-    if(!isset($_SESSION['current_order'])){
-        header('location: home.php');
-        exit();
-    }
+if(!isset($_SESSION['current_order'])){
+    header('location: customerDashboard.php');
+    exit();
+}
 
-    $order = $_SESSION['current_order'];
-    $items = $order['items'];
+$order = $_SESSION['current_order'];
+$items = $order['items'];
 ?>
 
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Invoice</title>
+    <title>Invoice #<?= $order['order_id']; ?></title>
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-    <center>
-        <h1>Order Invoice</h1>
-        <hr width="50%">
+    
+    <div id="invoice-container">
         
-        <div style="border: 1px solid black; width: 60%; padding: 20px; text-align: left;">
-            <table width="100%">
-                <tr>
-                    <td>
-                        <b>Order ID:</b> #<?php echo $order['order_id']; ?> <br>
-                        <b>Date:</b> <?php echo $order['date']; ?> <br>
-                        <b>Payment Method:</b> <?php echo $order['payment_method']; ?>
-                    </td>
-                    <td align="right">
-                        <b>Customer:</b> <?php echo $order['customer_name']; ?> <br>
-                        <b>Phone:</b> <?php echo $order['contact']; ?> <br>
-                        <b>Address:</b> <?php echo $order['address']; ?>
-                    </td>
-                </tr>
-            </table>
+        <h1 id="invoice-title">Order Invoice</h1>
+        <hr id="invoice-divider">
+        
+        <table id="invoice-details-table">
+            <tr>
+                <td class="valign-top">
+                    <b>Order ID:</b> #<?= $order['order_id']; ?> <br>
+                    <b>Date:</b> <?= $order['date']; ?> <br>
+                    <b>Payment:</b> <?= $order['payment_method']; ?>
+                </td>
+                <td class="text-right valign-top">
+                    <b>Customer:</b> <?= $order['customer_name']; ?> <br>
+                    <b>Phone:</b> <?= $order['contact']; ?> <br>
+                    <b>Address:</b> <?= $order['address']; ?>
+                </td>
+            </tr>
+        </table>
 
-            <br>
-            
-            <h3>Items Purchased:</h3>
-            <table border="1" width="100%" cellspacing="0" cellpadding="5">
+        <table id="invoice-items-table">
+            <thead>
                 <tr>
                     <th>Product</th>
                     <th>Price</th>
                     <th>Quantity</th>
                     <th>Total</th>
                 </tr>
+            </thead>
+            <tbody>
                 <?php foreach($items as $item){ ?>
                 <tr>
-                    <td><?php echo $item['name']; ?></td>
-                    <td align="center"><?php echo $item['price']; ?></td>
-                    <td align="center"><?php echo $item['qty']; ?></td>
-                    <td align="center"><?php echo $item['price'] * $item['qty']; ?></td>
+                    <td><?= $item['name']; ?></td>
+                    <td class="text-center">Tk <?= $item['price']; ?></td>
+                    <td class="text-center"><?= $item['qty']; ?></td>
+                    <td class="text-center">Tk <?= $item['price'] * $item['qty']; ?></td>
                 </tr>
                 <?php } ?>
-                <tr>
-                    <td colspan="3" align="right"><b>Grand Total:</b></td>
-                    <td align="center"><b><?php echo $order['total_amount']; ?></b></td>
+                
+                <tr id="invoice-total-row">
+                    <td colspan="3" class="text-right"><b>Grand Total:</b></td>
+                    <td class="text-center total-highlight"><b>Tk <?= $order['total_amount']; ?></b></td>
                 </tr>
-            </table>
+            </tbody>
+        </table>
 
-            <br><br>
-            <center>
-                <button onclick="window.print()">Print Invoice</button> 
-                <a href="home.php"><button>Go Home</button></a>
-            </center>
+        <div id="invoice-actions">
+            <button onclick="window.print()" id="print-btn">Print Invoice</button> 
+            <a href="customerDashboard.php"><button id="dashboard-btn">Back to Dashboard</button></a>
         </div>
-    </center>
+
+    </div>
+
 </body>
 </html>

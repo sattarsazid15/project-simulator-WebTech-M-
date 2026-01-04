@@ -30,62 +30,57 @@ if(isset($_GET['error'])){
 }
 ?>
 
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Edit Profile</title>
-    <link rel="stylesheet" href="../assets/css/style1.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <script src="../assets/js/validation.js"></script>
 </head>
 <body>
 
-<div class="form-container">
+<div class="form-container" id="edit-profile-container">
     <h2>Edit Profile</h2>
 
-    <form method="post" action="../controllers/customerProfileAuth.php"
-          onsubmit="return validateProfile();">
+    <form method="post" action="../controllers/customerProfileAuth.php" onsubmit="return validateProfile();" id="profile-form">
 
         <div class="form-group">
-            <label>Username</label>
-            <input type="text" name="username"
-                   value="<?= $currentUser['username'] ?>">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" value="<?= $currentUser['username'] ?>">
         </div>
 
         <div class="form-group">
-            <label>Email</label>
-            <input type="text" name="email"
-                   value="<?= $currentUser['email'] ?>">
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" value="<?= $currentUser['email'] ?>">
         </div>
 
-        <button type="submit" name="update_profile">Update Profile</button>
+        <button type="submit" name="update_profile" id="update-btn">Update Profile</button>
     </form>
 
-    <hr style="margin:20px 0;">
+    <hr id="profile-divider">
 
-    <form method="post" action="../controllers/customerProfileAuth.php"
-          onsubmit="return validatePassword();">
+    <form method="post" action="../controllers/customerProfileAuth.php" onsubmit="return validatePassword();" id="password-form">
 
         <div class="form-group">
-            <label>Old Password</label>
-            <input type="password" name="old_password">
+            <label for="old_password">Old Password</label>
+            <input type="password" name="old_password" id="old_password">
         </div>
 
         <div class="form-group">
-            <label>New Password</label>
-            <input type="password" name="new_password">
+            <label for="new_password">New Password</label>
+            <input type="password" name="new_password" id="new_password">
         </div>
 
         <div class="form-group">
-            <label>Confirm Password</label>
-            <input type="password" name="confirm_password">
+            <label for="confirm_password">Confirm Password</label>
+            <input type="password" name="confirm_password" id="confirm_password">
         </div>
 
-        <button type="submit" name="change_password">Change Password</button>
+        <button type="submit" name="change_password" id="change-pass-btn">Change Password</button>
     </form>
 
     <div class="form-footer">
-        <a href="customerDashboard.php">Back To menu </a>
+        <a href="customerDashboard.php">Back To Menu </a>
     </div>
 </div>
 
