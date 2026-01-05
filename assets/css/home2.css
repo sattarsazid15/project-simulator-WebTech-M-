@@ -24,7 +24,7 @@ body {
 .roles-bg {
     width: 100%;
     height: 380px;
-    background-image: url("../images/roles_bg.png");
+    background-image: url("../images/roles11.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -33,7 +33,7 @@ body {
 .role-buttons {
     display: flex;
     justify-content: center;
-    gap: 60px;
+    gap: 50px;
     margin-top: 10px;
 }
 

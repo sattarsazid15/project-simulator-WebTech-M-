@@ -20,7 +20,7 @@ if(isset($_SESSION['customer']) || isset($_COOKIE['status'])){
 <html>
 <head>
     <title>Select Role</title>
-    <link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="assets/css/home2.css">
 </head>
 <body>
 
@@ -33,6 +33,7 @@ if(isset($_SESSION['customer']) || isset($_COOKIE['status'])){
         <a href="views/adminLogin.php" class="role-btn">Admin</a>
         <a href="views/technicianLogin.php" class="role-btn">Technician</a>
         <a href="views/customerLogin.php" class="role-btn">Customer</a>
+        <a href="views/guestDashBoard.php" class="role-btn">Guest</a>
     </div>
 </div>
 
