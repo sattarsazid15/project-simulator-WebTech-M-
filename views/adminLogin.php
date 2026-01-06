@@ -1,13 +1,19 @@
 <?php
 session_start();
+
 if(isset($_SESSION['admin']) || isset($_COOKIE['admin_status'])){
     header("Location: adminDashboard.php");
     exit;
 }
-if(isset($_SESSION['technician']) || isset($_SESSION['customer'])){
-    session_unset();
-    session_destroy();
-    session_start();
+
+if(isset($_SESSION['customer']) || isset($_COOKIE['status'])){
+    header("Location: customerDashboard.php");
+    exit;
+}
+
+if(isset($_SESSION['technician']) || isset($_COOKIE['tech_status'])){
+    header("Location: technicianDashboard.php");
+    exit;
 }
 ?>
 <!DOCTYPE html>
@@ -35,6 +41,10 @@ if(isset($_SESSION['technician']) || isset($_SESSION['customer'])){
         </div>
 
         <button type="submit" id="admin-login-btn">Login</button>
+
+        <div class="form-footer">
+            <a href="../index.php">Back to Role Selection</a>
+        </div>
     </form>
 </div>
 

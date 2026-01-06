@@ -107,6 +107,21 @@ th {
     font-weight: bold; 
 }
 
+.status-Processing {
+    color: #17a2b8;
+    font-weight: bold;
+}
+
+.status-Delivered {
+    color: green;
+    font-weight: bold;
+}
+
+.status-Cancelled {
+    color: red;
+    font-weight: bold;
+}
+
 .no-data {
     text-align: center;
     padding: 20px;

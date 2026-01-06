@@ -59,8 +59,12 @@ if(isset($_POST['update_technician_admin'])){
     $username = $_POST['username'];
     $email = $_POST['email'];
     $spec = $_POST['specialization'];
+    $exp = $_POST['experience'];
+    $shop = $_POST['shop_details'];
+    $dob = $_POST['dob'];
+    $gender = $_POST['gender'];
     
-    if(updateTechnicianByAdmin($id, $username, $email, $spec)){
+    if(updateTechnicianFullProfile($id, $username, $email, $spec, $exp, $dob, $gender, $shop)){
         header("Location: ../views/adminTechnicians.php?msg=updated");
     } else {
         echo "Error updating technician.";

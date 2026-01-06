@@ -42,6 +42,30 @@ $tech = getTechnicianById($_GET['id']);
             <label for="specialization">Specialization</label>
             <input type="text" name="specialization" id="specialization" value="<?= $tech['specialization']; ?>" required>
         </div>
+
+        <div class="form-group">
+            <label for="experience">Experience (Years)</label>
+            <input type="number" name="experience" id="experience" value="<?= $tech['experience']; ?>">
+        </div>
+
+        <div class="form-group">
+            <label for="shop">Shop Details</label>
+            <input type="text" name="shop_details" id="shop" value="<?= $tech['shop_details']; ?>">
+        </div>
+
+        <div class="form-group">
+            <label for="dob">Date of Birth</label>
+            <input type="date" name="dob" id="dob" value="<?= $tech['dob']; ?>">
+        </div>
+
+        <div class="form-group">
+            <label for="gender">Gender</label>
+            <select name="gender" id="gender">
+                <option value="Male" <?= ($tech['gender'] == 'Male') ? 'selected' : ''; ?>>Male</option>
+                <option value="Female" <?= ($tech['gender'] == 'Female') ? 'selected' : ''; ?>>Female</option>
+                <option value="Other" <?= ($tech['gender'] == 'Other') ? 'selected' : ''; ?>>Other</option>
+            </select>
+        </div>
         
         <button type="submit" name="update_technician_admin" id="update-btn">Update Technician</button>
     </form>
