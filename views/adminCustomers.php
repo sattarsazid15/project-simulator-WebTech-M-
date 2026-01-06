@@ -36,7 +36,6 @@ $result = getAllCustomers();
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Username</th>
                         <th>Email</th>
                         <th>Actions</th>
@@ -45,7 +44,6 @@ $result = getAllCustomers();
                 <tbody>
                     <?php while($row = mysqli_fetch_assoc($result)) { ?>
                     <tr>
-                        <td><?= $row['id']; ?></td>
                         <td><?= $row['username']; ?></td>
                         <td><?= $row['email']; ?></td>
                         <td>

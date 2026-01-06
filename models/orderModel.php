@@ -26,6 +26,12 @@ function getAllOrders(){
     return mysqli_query($con, $sql);
 }
 
+function getOrdersByCustomer($customer_id){
+    $con = getConnection();
+    $sql = "SELECT * FROM orders WHERE customer_id='{$customer_id}' ORDER BY order_date DESC";
+    return mysqli_query($con, $sql);
+}
+
 function getTotalEarnings(){
     $con = getConnection();
     $sql = "SELECT SUM(total_amount) as total FROM orders WHERE status='Delivered'";

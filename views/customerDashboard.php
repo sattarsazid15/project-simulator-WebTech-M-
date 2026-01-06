@@ -86,7 +86,7 @@ if(isset($_GET['search']) && !empty($_GET['search'])){
 
     <div id="side-panel">
         <a href="customerEditProfile.php" class="side-btn">Edit Profile 👤</a>
-        <a href="repairRequest.php" class="side-btn">Request Repair 🛠️</a>
+        <a href="orderStatus.php" class="side-btn">Order Status 📦</a> <a href="repairRequest.php" class="side-btn">Request Repair 🛠️</a>
         <a href="repairStatus.php" class="side-btn">Repair Status ⚙️</a> 
         <a href="checkout.php" class="side-btn">Checkout 💳</a>
         <a href="../controllers/logout.php" class="side-btn logout">Logout ➜</a>

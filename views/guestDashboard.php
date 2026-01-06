@@ -1,7 +1,12 @@
 <?php
 require_once('../models/productModel.php');
 
-$result = getAllProducts();
+$result = null;
+if(isset($_GET['search']) && !empty($_GET['search'])){
+    $result = searchProducts($_GET['search']); 
+} else {
+    $result = getAllProducts();
+}
 ?>
 
 <!DOCTYPE html>
@@ -65,6 +70,7 @@ $result = getAllProducts();
 
     <div id="side-panel">
         <a href="customerLogin.php" class="side-btn">Login 🔐</a>
+        <a href="../index.php" class="side-btn">Back to Roles 🔙</a>
     </div>
 
 </div>
