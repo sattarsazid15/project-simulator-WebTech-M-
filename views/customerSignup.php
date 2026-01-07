@@ -23,7 +23,8 @@
 
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="text" name="email" id="email">
+            <input type="text" name="email" id="email" onkeyup="checkEmail()">
+            <span id="email-msg"></span>
         </div>
 
         <div class="form-group">
@@ -42,3 +43,33 @@
 
 </body>
 </html>
+
+<script>
+function checkEmail(){
+    let email = document.getElementById("email").value;
+
+    if(email === ""){
+        document.getElementById("email-msg").innerHTML = "";
+        return;
+    }
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "../controllers/ajaxCheckEmail.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("email=" + email);
+
+    xhttp.onreadystatechange = function(){
+    if(this.readyState == 4 && this.status == 200){
+        let res = this.responseText.trim();
+
+        if(res === "exists"){
+            document.getElementById("email-msg").innerHTML =
+                "<span style='color:red'>Email already exists</span>";
+        } else {
+            document.getElementById("email-msg").innerHTML =
+                "<span style='color:green'>Email available</span>";
+        }
+    }
+}
+}
+</script>
