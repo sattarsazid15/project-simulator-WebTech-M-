@@ -121,4 +121,19 @@ function updateTechnicianByAdmin($id, $username, $email, $specialization){
     $sql = "UPDATE technicians SET username='{$username}', email='{$email}', specialization='{$specialization}' WHERE id='{$id}'";
     return mysqli_query($con, $sql);
 }
+
+function technicianEmailExists($email){
+    $con = getConnection();
+    $sql = "SELECT id FROM technicians WHERE email='$email'";
+    $result = mysqli_query($con, $sql);
+    return mysqli_num_rows($result) > 0;
+}
+
+function technicianUsernameExists($username){
+    $con = getConnection();
+    $sql = "SELECT id FROM technicians WHERE username='$username'";
+    $result = mysqli_query($con, $sql);
+    return mysqli_num_rows($result) > 0;
+}
+
 ?>
