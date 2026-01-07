@@ -14,12 +14,14 @@
 
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="text" name="email" id="email">
+            <input type="text" name="email" id="email" onkeyup="checkTechEmail()">
+            <span id="email-msg"></span>
         </div>
 
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" name="username" id="username">
+            <input type="text" name="username" id="username" onkeyup="checkTechUsername()">
+            <span id="username-msg"></span>
         </div>
 
         <div class="form-group">
@@ -66,3 +68,55 @@
 
 </body>
 </html>
+
+<script>
+function checkTechEmail(){
+    let email = document.getElementById("email").value;
+    let msg = document.getElementById("email-msg");
+
+    if(email === ""){
+        msg.innerHTML = "";
+        return;
+    }
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "../controllers/ajaxCheckTechnician.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("email=" + email);
+
+    xhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            if(this.responseText.trim() === "email_exists"){
+                msg.innerHTML = "<span style='color:red'>Email already exists</span>";
+            } else {
+                msg.innerHTML = "<span style='color:green'>Email available</span>";
+            }
+        }
+    }
+}
+
+function checkTechUsername(){
+    let username = document.getElementById("username").value;
+    let msg = document.getElementById("username-msg");
+
+    if(username === ""){
+        msg.innerHTML = "";
+        return;
+    }
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "../controllers/ajaxCheckTechnician.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("username=" + username);
+
+    xhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            if(this.responseText.trim() === "username_exists"){
+                msg.innerHTML = "<span style='color:red'>Username already exists</span>";
+            } else {
+                msg.innerHTML = "<span style='color:green'>Username available</span>";
+            }
+        }
+    }
+}
+</script>
