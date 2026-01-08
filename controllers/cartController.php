@@ -6,6 +6,50 @@ if(!isset($_SESSION['cart'])){
     $_SESSION['cart'] = [];
 }
 
+if(isset($_POST['action']) && $_POST['action'] == 'update_qty_ajax'){
+    $id = $_POST['id'];
+    $qty = (int)$_POST['qty'];
+
+    if($qty < 1) $qty = 1;
+    if($qty > 5) $qty = 5;
+
+    $_SESSION['cart'][$id] = $qty;
+
+    $product = getProductById($id);
+    $itemSubtotal = $product['price'] * $qty;
+    
+    $grandTotal = 0;
+    foreach($_SESSION['cart'] as $cartId => $cartQty){
+        $p = getProductById($cartId);
+        if($p) $grandTotal += ($p['price'] * $cartQty);
+    }
+
+    echo json_encode([
+        'status' => 'success',
+        'subtotal' => $itemSubtotal,
+        'grandTotal' => $grandTotal
+    ]);
+    exit;
+}
+
+if(isset($_POST['action']) && $_POST['action'] == 'remove_item_ajax'){
+    $id = $_POST['id'];
+    unset($_SESSION['cart'][$id]);
+
+    $grandTotal = 0;
+    foreach($_SESSION['cart'] as $cartId => $cartQty){
+        $p = getProductById($cartId);
+        if($p) $grandTotal += ($p['price'] * $cartQty);
+    }
+
+    echo json_encode([
+        'status' => 'success',
+        'grandTotal' => $grandTotal,
+        'isEmpty' => empty($_SESSION['cart'])
+    ]);
+    exit;
+}
+
 if(isset($_POST['action']) && $_POST['action'] == 'add'){
     
     $id = $_POST['id'];
@@ -48,12 +92,9 @@ if(isset($_POST['action']) && $_POST['action'] == 'add'){
 if(isset($_POST['update_qty'])){
     $id = $_POST['id'];
     $qty = (int)$_POST['qty'];
-
     if($qty < 1) $qty = 1;
     if($qty > 5) $qty = 5; 
-
     $_SESSION['cart'][$id] = $qty;
-    
     header("Location: ../views/checkout.php");
     exit;
 }

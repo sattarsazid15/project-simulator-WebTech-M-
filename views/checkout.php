@@ -17,7 +17,7 @@ $total_price = 0;
     <title>Checkout</title>
     <link rel="stylesheet" href="../assets/css/checkout.css">
     <script src="../assets/js/validation.js"></script>
-</head>
+    <script src="../assets/js/ajax.js"></script> </head>
 <body>
 
 <div id="header">
@@ -59,7 +59,7 @@ $total_price = 0;
                         $subtotal = $product['price'] * $qty;
                         $total_price += $subtotal;
                     ?>
-                    <tr>
+                    <tr id="cart-row-<?= $id; ?>">
                         <td>
                             <div class="product-info">
                                 <img src="../assets/uploads/<?= $product['image']; ?>" alt="img">
@@ -71,22 +71,26 @@ $total_price = 0;
                         </td>
                         <td>Tk <?= $product['price']; ?></td>
                         <td>
-                            <form method="POST" action="../controllers/cartController.php">
-                                <input type="hidden" name="update_qty" value="true">
-                                <input type="hidden" name="id" value="<?= $id; ?>">
-                                <input type="number" name="qty" value="<?= $qty; ?>" min="1" max="5" class="qty-input" onchange="this.form.submit()">
-                            </form>
+                            <input type="number" 
+                                   value="<?= $qty; ?>" 
+                                   min="1" max="5" 
+                                   class="qty-input" 
+                                   onchange="updateCartQty(<?= $id; ?>, this)">
                         </td>
-                        <td>Tk <?= $subtotal; ?></td>
+                        <td id="subtotal-<?= $id; ?>">Tk <?= $subtotal; ?></td>
                         <td>
-                            <a href="../controllers/cartController.php?remove=<?= $id; ?>" class="remove-link">Remove</a>
+                            <button class="remove-link" 
+                                    onclick="removeCartItem(<?= $id; ?>)" 
+                                    style="background:none; border:none; color:red; cursor:pointer; text-decoration:underline;">
+                                Remove
+                            </button>
                         </td>
                     </tr>
                     <?php } ?>
                     
                     <tr id="total-row">
                         <td colspan="3" class="text-right">Grand Total:</td>
-                        <td colspan="2">Tk <?= $total_price; ?></td>
+                        <td colspan="2" id="grand-total">Tk <?= $total_price; ?></td>
                     </tr>
                 </tbody>
             </table>
@@ -98,7 +102,7 @@ $total_price = 0;
             <h3>Shipping & Payment Details</h3>
             
             <form method="POST" action="../controllers/checkoutCheck.php" id="checkout-form" onsubmit="return validateCheckout()">
-                <input type="hidden" name="total_amount" value="<?= $total_price; ?>">
+                <input type="hidden" name="total_amount" id="input-total-amount" value="<?= $total_price; ?>">
                 
                 <div class="form-group">
                     <label>Full Name:</label>

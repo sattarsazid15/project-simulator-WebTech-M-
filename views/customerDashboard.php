@@ -7,6 +7,16 @@ if(!isset($_SESSION['customer']) && !isset($_COOKIE['status'])){
     exit();
 }
 
+<<<<<<< Updated upstream
+=======
+$user_id = $_SESSION['customer']['id'];
+$wishlist_data = getUserWishlist($user_id);
+$wishlist_ids = [];
+while($w = mysqli_fetch_assoc($wishlist_data)){
+    $wishlist_ids[] = $w['id']; 
+}
+
+>>>>>>> Stashed changes
 $result = null;
 if(isset($_GET['search']) && !empty($_GET['search'])){
     $result = searchProducts($_GET['search']); 
@@ -57,6 +67,12 @@ if(isset($_GET['search']) && !empty($_GET['search'])){
             <?php 
             if(mysqli_num_rows($result) > 0){
                 while($row = mysqli_fetch_assoc($result)) { 
+<<<<<<< Updated upstream
+=======
+                    $is_wishlisted = in_array($row['id'], $wishlist_ids);
+                    $heart_class = $is_wishlisted ? 'heart-active' : '';
+                    $heart_symbol = $is_wishlisted ? '&#10084;' : '&#9825;';
+>>>>>>> Stashed changes
             ?>
                 <div class="product-card" data-type="<?= strtolower($row['type']); ?>">
                     <img src="../assets/uploads/<?= $row['image']; ?>" alt="Product Image">

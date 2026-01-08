@@ -3,15 +3,18 @@ require_once('db.php');
 
 function addOrder($order){
     $con = getConnection();
+    $customerId = isset($order['customer_id']) ? $order['customer_id'] : 0;
+    $payMethod = isset($order['payment_method']) ? $order['payment_method'] : 'Cash on Delivery';
+
     $sql = "INSERT INTO orders (customer_id, customer_name, contact, address, total_amount, status, payment_method) 
             VALUES (
-                '{$order['customer_id']}', 
+                '{$customerId}', 
                 '{$order['customer_name']}', 
                 '{$order['contact']}', 
                 '{$order['address']}', 
                 '{$order['total_amount']}', 
                 '{$order['status']}', 
-                '{$order['payment_method']}'
+                '{$payMethod}'
             )";
     
     if(mysqli_query($con, $sql)){
@@ -44,5 +47,28 @@ function updateOrderStatus($id, $status){
     $con = getConnection();
     $sql = "UPDATE orders SET status='{$status}' WHERE id='{$id}'";
     return mysqli_query($con, $sql);
+}
+
+function addOrderFeedback($orderId, $customerId, $feedback){
+    $con = getConnection();
+    $sql = "INSERT INTO order_feedback (order_id, customer_id, feedback)
+            VALUES ('$orderId', '$customerId', '$feedback')";
+    return mysqli_query($con, $sql);
+}
+
+function getAllFeedbacks(){
+    $con = getConnection();
+    $sql = "SELECT f.order_id, f.feedback, f.created_at, u.username
+            FROM order_feedback f
+            JOIN users u ON f.customer_id = u.id
+            ORDER BY f.created_at DESC";
+    return mysqli_query($con, $sql);
+}
+
+function hasFeedback($orderId){
+    $con = getConnection();
+    $sql = "SELECT id FROM order_feedback WHERE order_id='$orderId'";
+    $res = mysqli_query($con, $sql);
+    return mysqli_num_rows($res) > 0;
 }
 ?>

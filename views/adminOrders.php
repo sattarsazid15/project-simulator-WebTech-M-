@@ -7,16 +7,6 @@ if(!isset($_SESSION['admin']) && !isset($_COOKIE['admin_status'])){
     exit;
 }
 
-if(isset($_POST['update_status'])){
-    $id = $_POST['order_id'];
-    $status = $_POST['status'];
-    if(updateOrderStatus($id, $status)){
-        echo "<script>alert('Status updated successfully to $status!');</script>";
-    } else {
-        echo "<script>alert('Failed to update status.');</script>";
-    }
-}
-
 $result = getAllOrders();
 ?>
 
@@ -25,6 +15,7 @@ $result = getAllOrders();
 <head>
     <title>Manage Orders</title>
     <link rel="stylesheet" href="../assets/css/adminOrders.css">
+    <script src="../assets/js/ajax.js"></script>
 </head>
 <body>
 
@@ -62,18 +53,19 @@ $result = getAllOrders();
                             <td><?= $row['contact']; ?></td>
                             <td><?= $row['total_amount']; ?></td>
                             <td>
-                                <form method="POST" action="">
-                                    <input type="hidden" name="order_id" value="<?= $row['id']; ?>">
-                                    <select name="status">
-                                        <option value="Pending" <?= ($row['status']=='Pending')?'selected':''; ?>>Pending</option>
-                                        <option value="Processing" <?= ($row['status']=='Processing')?'selected':''; ?>>Processing</option>
-                                        <option value="Delivered" <?= ($row['status']=='Delivered')?'selected':''; ?>>Delivered</option>
-                                        <option value="Cancelled" <?= ($row['status']=='Cancelled')?'selected':''; ?>>Cancelled</option>
-                                    </select>
-                                    <button type="submit" name="update_status" class="btn-update">Update</button>
-                                </form>
+                                <select id="status-select-<?= $row['id']; ?>">
+                                    <option value="Pending" <?= ($row['status']=='Pending')?'selected':''; ?>>Pending</option>
+                                    <option value="Processing" <?= ($row['status']=='Processing')?'selected':''; ?>>Processing</option>
+                                    <option value="Delivered" <?= ($row['status']=='Delivered')?'selected':''; ?>>Delivered</option>
+                                    <option value="Cancelled" <?= ($row['status']=='Cancelled')?'selected':''; ?>>Cancelled</option>
+                                </select>
+                                
+                                <button type="button" class="btn-update" onclick="updateOrderStatus(<?= $row['id']; ?>)">Update</button>
                             </td>
-                            <td class="status-<?= $row['status']; ?>"><?= $row['status']; ?></td>
+                            
+                            <td id="status-text-<?= $row['id']; ?>" class="status-<?= $row['status']; ?>">
+                                <?= $row['status']; ?>
+                            </td>
                         </tr>
                     <?php } } else { ?>
                         <tr><td colspan="6" class="text-center">No orders found.</td></tr>
