@@ -7,7 +7,7 @@ if(!isset($_SESSION['customer']) && !isset($_COOKIE['status'])){
     exit;
 }
 
-//$currentUser = getUserByEmail($_SESSION['customer']['email']);
+
 ?>
 
 <?php
