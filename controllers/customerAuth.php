@@ -28,6 +28,14 @@ if(isset($_POST['action']) && $_POST['action'] == "signup"){
         exit;
     }
 
+     if(checkEmailExists($email)){
+        echo "<script>
+            alert('Email already exists. Please login.');
+            window.location='../views/customerSignup.php';
+        </script>";
+        exit;
+    }
+
     $user = [
         'username' => $username,
         'email' => $email,

@@ -7,7 +7,7 @@ if(!isset($_SESSION['customer']) && !isset($_COOKIE['status'])){
     exit;
 }
 
-$currentUser = getUserByEmail($_SESSION['customer']['email']);
+
 ?>
 
 <?php
@@ -37,6 +37,30 @@ if(isset($_GET['error'])){
     <link rel="stylesheet" href="../assets/css/style.css">
     <script src="../assets/js/validation.js"></script>
 </head>
+
+<script>
+window.onload = function () {
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "../controllers/customerProfileJson.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send();
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            let user = JSON.parse(this.responseText);
+
+            if(user.error){
+                alert(user.error);
+                return;
+            }
+
+            document.getElementById("username").value = user.username;
+            document.getElementById("email").value = user.email;
+        }
+    }
+}
+</script>
+
 <body>
 
 <div class="form-container" id="edit-profile-container">
@@ -46,12 +70,14 @@ if(isset($_GET['error'])){
 
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" name="username" id="username" value="<?= $currentUser['username'] ?>">
+            <!--input type="text" name="username" id="username" value="<?//= $currentUser['username'] ?>"-->
+            <input type="text" name="username" id="username">
         </div>
 
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="text" name="email" id="email" value="<?= $currentUser['email'] ?>">
+            <!-- input type="text" name="email" id="email" value="<?//= $currentUser['email'] ?>"-->
+            <input type="text" name="email" id="email">
         </div>
 
         <button type="submit" name="update_profile" id="update-btn">Update Profile</button>

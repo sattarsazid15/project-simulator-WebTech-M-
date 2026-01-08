@@ -4,6 +4,7 @@
     <title>Technician Sign Up</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <script src="../assets/js/validation.js"></script>
+    <script src="../assets/js/ajax.js"></script>
 </head>
 <body>
 
@@ -14,12 +15,14 @@
 
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="text" name="email" id="email">
+            <input type="text" name="email" id="email" onkeyup="checkTechEmail()">
+            <span id="email-msg"></span>
         </div>
 
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" name="username" id="username">
+            <input type="text" name="username" id="username" onkeyup="checkTechUsername()">
+            <span id="username-msg"></span>
         </div>
 
         <div class="form-group">

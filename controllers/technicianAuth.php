@@ -38,6 +38,17 @@ if(isset($_POST['submit'])){
         exit;
     }
 
+    if(technicianEmailExists($email)){
+    echo "<script>alert('Email already exists'); window.history.back();</script>";
+    exit;
+    }
+
+    if(technicianUsernameExists($username)){
+    echo "<script>alert('Username already exists'); window.history.back();</script>";
+    exit;
+    }
+
+
     $tech = [
         'email' => $email,
         'username' => $username,

@@ -50,7 +50,15 @@ $my_orders = getOrdersByCustomer($_SESSION['customer']['id']);
                             
                             <td class="status-<?= $row['status']; ?>">
                                 <?= $row['status']; ?>
+
+                                <?php if($row['status'] == 'Delivered' && !hasFeedback($row['id'])) { ?>
+                                    <br>
+                                <a href="orderFeedback.php?order_id=<?= $row['id']; ?>" class="review-btn">
+                                    Give Review
+                                </a>
+                                <?php } ?>
                             </td>
+
                         </tr>
                     <?php } } else { ?>
                         <tr><td colspan="5" class="no-data">You haven't placed any orders yet.</td></tr>

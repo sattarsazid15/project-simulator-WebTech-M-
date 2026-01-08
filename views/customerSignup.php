@@ -6,6 +6,7 @@
     <title>Customer Sign Up</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <script src="../assets/js/validation.js"></script>
+    <script src="../assets/js/ajax.js"></script>
 </head>
 <body>
 
@@ -23,7 +24,8 @@
 
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="text" name="email" id="email">
+            <input type="text" name="email" id="email" onkeyup="checkEmail()">
+            <span id="email-msg"></span>
         </div>
 
         <div class="form-group">
@@ -42,3 +44,4 @@
 
 </body>
 </html>
+
