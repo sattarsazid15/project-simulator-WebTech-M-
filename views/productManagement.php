@@ -15,7 +15,7 @@ $result = getAllProducts();
 <head>
     <title>Manage Products</title>
     <link rel="stylesheet" href="../assets/css/productManagement.css">
-</head>
+    <script src="../assets/js/ajax.js"></script> </head>
 <body>
 
 <div id="header">
@@ -24,7 +24,6 @@ $result = getAllProducts();
 </div>
 
 <div id="main-container">
-    
     <div id="content-area">
         <div id="table-box">
             
@@ -48,7 +47,7 @@ $result = getAllProducts();
                 </thead>
                 <tbody>
                     <?php while($row = mysqli_fetch_assoc($result)) { ?>
-                    <tr>
+                    <tr id="row-<?= $row['id']; ?>">
                         <td>
                             <img src="../assets/uploads/<?= $row['image']; ?>" alt="Product">
                         </td>
@@ -58,9 +57,9 @@ $result = getAllProducts();
                         <td>
                             <a href="editProduct.php?id=<?= $row['id']; ?>" class="action-link btn-edit">Edit</a>
                             
-                            <a href="../controllers/productController.php?delete=<?= $row['id']; ?>" 
-                               class="action-link btn-delete" 
-                               onclick="return confirm('Are you sure you want to delete this product?');">Delete</a>
+                            <button class="action-link btn-delete" 
+                                    onclick="deleteProduct(<?= $row['id']; ?>)" 
+                                    style="border:none; cursor:pointer;">Delete</button>
                         </td>
                     </tr>
                     <?php } ?>
