@@ -142,3 +142,81 @@ function toggleWishlist(productId, btnElement) {
         }
     };
 }
+
+function checkEmail(){
+    let email = document.getElementById("email").value;
+
+    if(email === ""){
+        document.getElementById("email-msg").innerHTML = "";
+        return;
+    }
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "../controllers/ajaxCheckEmail.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("email=" + email);
+
+    xhttp.onreadystatechange = function(){
+    if(this.readyState == 4 && this.status == 200){
+        let res = this.responseText.trim();
+
+        if(res === "exists"){
+            document.getElementById("email-msg").innerHTML =
+                "<span style='color:red'>Email already exists</span>";
+        } else {
+            document.getElementById("email-msg").innerHTML =
+                "<span style='color:green'>Email available</span>";
+        }
+    }
+}
+}
+
+function checkTechEmail(){
+    let email = document.getElementById("email").value;
+    let msg = document.getElementById("email-msg");
+
+    if(email === ""){
+        msg.innerHTML = "";
+        return;
+    }
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "../controllers/ajaxCheckTechnician.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("email=" + email);
+
+    xhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            if(this.responseText.trim() === "email_exists"){
+                msg.innerHTML = "<span style='color:red'>Email already exists</span>";
+            } else {
+                msg.innerHTML = "<span style='color:green'>Email available</span>";
+            }
+        }
+    }
+}
+
+function checkTechUsername(){
+    let username = document.getElementById("username").value;
+    let msg = document.getElementById("username-msg");
+
+    if(username === ""){
+        msg.innerHTML = "";
+        return;
+    }
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "../controllers/ajaxCheckTechnician.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("username=" + username);
+
+    xhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            if(this.responseText.trim() === "username_exists"){
+                msg.innerHTML = "<span style='color:red'>Username already exists</span>";
+            } else {
+                msg.innerHTML = "<span style='color:green'>Username available</span>";
+            }
+        }
+    }
+}
