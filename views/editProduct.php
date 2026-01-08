@@ -1,6 +1,5 @@
 <?php
 session_start();
-require_once('../models/productModel.php');
 
 if(!isset($_SESSION['admin']) && !isset($_COOKIE['admin_status'])){
     header("Location: adminLogin.php");
@@ -10,13 +9,6 @@ if(!isset($_GET['id'])){
     header("Location: productManagement.php");
     exit();
 }
-$id = $_GET['id'];
-$product = getProductById($id);
-
-if(!$product){
-    echo "Product not found.";
-    exit();
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,43 +16,44 @@ if(!$product){
     <title>Edit Product</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/productForm.css">
+    <script src="../assets/js/ajax.js"></script>
 </head>
-<body>
+<body onload="fetchProductDetails()">
 
 <div class="form-container" id="edit-product-container">
     <h2>Edit Product</h2>
 
     <form method="post" action="../controllers/productController.php" enctype="multipart/form-data" id="edit-product-form">
         
-        <input type="hidden" name="id" value="<?= $product['id']; ?>">
+        <input type="hidden" name="id" value="<?= $_GET['id']; ?>">
 
         <div class="form-group">
             <label for="product-type">Product Category</label>
             <select name="type" id="product-type" required>
-                <option value="mobile" <?= ($product['type'] == 'mobile' || $product['type'] == 'Mobile') ? 'selected' : ''; ?>>Mobile</option>
-                <option value="computer" <?= ($product['type'] == 'computer' || $product['type'] == 'Computer') ? 'selected' : ''; ?>>Computer</option>
-                <option value="gadget" <?= ($product['type'] == 'gadget' || $product['type'] == 'Gadget') ? 'selected' : ''; ?>>Gadget</option>
+                <option value="mobile">Mobile</option>
+                <option value="computer">Computer</option>
+                <option value="gadget">Gadget</option>
             </select>
         </div>
 
         <div class="form-group">
             <label for="product-name">Product Name / Model</label>
-            <input type="text" name="name" id="product-name" value="<?= $product['name']; ?>" required>
+            <input type="text" name="name" id="product-name" required>
         </div>
 
         <div class="form-group">
             <label for="product-price">Price (Tk)</label>
-            <input type="number" name="price" id="product-price" value="<?= $product['price']; ?>" required>
+            <input type="number" name="price" id="product-price" required>
         </div>
 
         <div class="form-group">
             <label for="product-desc">Description & Specs</label>
-            <textarea name="description" id="product-desc" rows="5"><?= isset($product['description']) ? $product['description'] : ''; ?></textarea>
+            <textarea name="description" id="product-desc" rows="5"></textarea>
         </div>
 
         <div class="form-group">
             <label>Current Image</label><br>
-            <img src="../assets/uploads/<?= $product['image']; ?>" id="current-image" alt="Current Product Image">
+            <img src="" id="current-image" alt="Current Product Image" style="width: 100px; display: block;">
             
             <label for="product-image-input">Change Image (Optional)</label>
             <input type="file" name="image" id="product-image-input">

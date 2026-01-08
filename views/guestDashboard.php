@@ -14,6 +14,11 @@ if(isset($_GET['search']) && !empty($_GET['search'])){
 <head>
     <title>Guest</title>
     <link rel="stylesheet" href="../assets/css/customerMenu.css">
+    <script>
+
+        const isGuest = true;
+    </script>
+    <script src="../assets/js/ajax.js"></script>
 </head>
 <body>
 
@@ -27,18 +32,15 @@ if(isset($_GET['search']) && !empty($_GET['search'])){
     <div id="content-area">
 
         <div id="search-section">
-            <form method="GET" action="guestDashboard.php" id="search-form">
-                <input type="text" name="search" placeholder="Search by name or type..." 
-                       value="<?= isset($_GET['search']) ? $_GET['search'] : ''; ?>"
-                       id="search-input">
-                <button type="submit" id="search-btn">Search</button>
-                <?php if(isset($_GET['search'])) { ?>
-                    <a href="guestDashboard.php"><button type="button" id="reset-btn">Reset</button></a>
-                <?php } ?>
-            </form>
+            <input type="text" id="search-input" onkeyup="searchProducts()" placeholder="Search by name or type..." 
+                   value="<?= isset($_GET['search']) ? $_GET['search'] : ''; ?>">
+            
+            <button type="button" id="search-btn" onclick="searchProducts()">Search</button>
+            
+            <button type="button" id="reset-btn" onclick="window.location.reload()">Reset</button>
         </div>
 
-        <select id="filter-select" onchange="filterProducts(this.value)">
+        <select id="filter-select" onchange="filterProducts()">
             <option value="all">All Categories</option>
             <option value="mobile">Mobile</option>
             <option value="computer">Computer</option>
@@ -76,17 +78,6 @@ if(isset($_GET['search']) && !empty($_GET['search'])){
 </div>
 
 <script>
-function filterProducts(type) {
-    const products = document.querySelectorAll('.product-card');
-
-    products.forEach(product => {
-        if (type === 'all' || product.dataset.type === type) {
-            product.style.display = 'inline-block';
-        } else {
-            product.style.display = 'none';
-        }
-    });
-}
 
 function loginAlert(){
     alert("Please login first to add items to cart!");

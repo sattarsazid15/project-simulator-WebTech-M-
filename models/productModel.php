@@ -70,4 +70,30 @@ function getTotalProducts(){
     $row = mysqli_fetch_assoc($result);
     return $row['count'];
 }
+function isInWishlist($user_id, $product_id) {
+    $con = getConnection();
+    $sql = "SELECT * FROM wishlist WHERE user_id='$user_id' AND product_id='$product_id'";
+    $result = mysqli_query($con, $sql);
+    return mysqli_num_rows($result) > 0;
+}
+function addToWishlist($user_id, $product_id) {
+    $con = getConnection();
+    $sql = "INSERT INTO wishlist (user_id, product_id) VALUES ('$user_id', '$product_id')";
+    return mysqli_query($con, $sql);
+}
+
+function removeFromWishlist($user_id, $product_id) {
+    $con = getConnection();
+    $sql = "DELETE FROM wishlist WHERE user_id='$user_id' AND product_id='$product_id'";
+    return mysqli_query($con, $sql);
+}
+function getUserWishlist($user_id) {
+    $con = getConnection();
+    $sql = "SELECT p.*, w.id as wishlist_id 
+            FROM wishlist w 
+            JOIN products p ON w.product_id = p.id 
+            WHERE w.user_id = '$user_id'";
+    return mysqli_query($con, $sql);
+}
+
 ?>
