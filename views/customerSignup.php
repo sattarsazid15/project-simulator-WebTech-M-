@@ -6,6 +6,7 @@
     <title>Customer Sign Up</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <script src="../assets/js/validation.js"></script>
+    <script src="../assets/js/ajax.js"></script>
 </head>
 <body>
 
@@ -44,32 +45,3 @@
 </body>
 </html>
 
-<script>
-function checkEmail(){
-    let email = document.getElementById("email").value;
-
-    if(email === ""){
-        document.getElementById("email-msg").innerHTML = "";
-        return;
-    }
-
-    let xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "../controllers/ajaxCheckEmail.php", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("email=" + email);
-
-    xhttp.onreadystatechange = function(){
-    if(this.readyState == 4 && this.status == 200){
-        let res = this.responseText.trim();
-
-        if(res === "exists"){
-            document.getElementById("email-msg").innerHTML =
-                "<span style='color:red'>Email already exists</span>";
-        } else {
-            document.getElementById("email-msg").innerHTML =
-                "<span style='color:green'>Email available</span>";
-        }
-    }
-}
-}
-</script>
