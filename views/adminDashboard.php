@@ -62,6 +62,7 @@ $earnings = getTotalEarnings();
         <a href="adminOrders.php" class="side-btn">Manage Orders 🚚</a>
         <a href="adminCustomers.php" class="side-btn">Manage Customers 👥</a>
         <a href="adminTechnicians.php" class="side-btn">Manage Technicians 👨‍🔧</a>
+        <a href="adminFeedback.php" class="side-btn">Check Feedback 📝</a>
         <a href="../controllers/logout.php" class="side-btn logout">Logout ➜</a>
     </div>
 
