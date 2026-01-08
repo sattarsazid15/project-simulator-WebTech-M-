@@ -95,5 +95,4 @@ function getUserWishlist($user_id) {
             WHERE w.user_id = '$user_id'";
     return mysqli_query($con, $sql);
 }
-
 ?>

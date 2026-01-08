@@ -7,14 +7,12 @@ if(!isset($_SESSION['customer']) && !isset($_COOKIE['status'])){
     exit();
 }
 
-
 $user_id = $_SESSION['customer']['id'];
 $wishlist_data = getUserWishlist($user_id);
 $wishlist_ids = [];
 while($w = mysqli_fetch_assoc($wishlist_data)){
     $wishlist_ids[] = $w['id']; 
 }
-
 
 $result = null;
 if(isset($_GET['search']) && !empty($_GET['search'])){
@@ -63,10 +61,9 @@ if(isset($_GET['search']) && !empty($_GET['search'])){
             <?php 
             if(mysqli_num_rows($result) > 0){
                 while($row = mysqli_fetch_assoc($result)) { 
-                    // Wishlist Logic
                     $is_wishlisted = in_array($row['id'], $wishlist_ids);
                     $heart_class = $is_wishlisted ? 'heart-active' : '';
-                    $heart_symbol = $is_wishlisted ? '❤' : '♡';
+                    $heart_symbol = $is_wishlisted ? '&#10084;' : '&#9825;';
             ?>
                 <div class="product-card" data-type="<?= strtolower($row['type']); ?>">
                     

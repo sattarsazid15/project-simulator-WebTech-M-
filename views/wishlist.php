@@ -39,7 +39,7 @@ $result = getUserWishlist($user_id);
                     
                     <button class="wishlist-btn heart-active" 
                             onclick="toggleWishlist(<?= $row['id']; ?>, this)">
-                        ❤
+                        &#10084;
                     </button>
 
                     <img src="../assets/uploads/<?= $row['image']; ?>" alt="Product Image">

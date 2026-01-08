@@ -107,8 +107,6 @@ function loadProducts(action, value) {
     };
 }
 
-
-
 function toggleWishlist(productId, btnElement) {
     let xhttp = new XMLHttpRequest();
     xhttp.open('POST', '../controllers/productController.php', true);
@@ -123,17 +121,15 @@ function toggleWishlist(productId, btnElement) {
                 alert("Please login to use the wishlist!");
                 window.location.href = 'customerLogin.php';
             } else if (response.status === 'added') {
-                btnElement.classList.add('heart-active'); 
-                btnElement.innerHTML = '❤'; 
+                btnElement.classList.add('heart-active');
+                btnElement.innerHTML = '&#10084;'; 
             } else if (response.status === 'removed') {
-                btnElement.classList.remove('heart-active'); 
-                btnElement.innerHTML = '♡';
-                
+                btnElement.classList.remove('heart-active');
+                btnElement.innerHTML = '&#9825;';
                 
                 let card = document.getElementById('card-' + productId);
                 if(card && window.location.href.includes("wishlist.php")){
                     card.remove();
-                    
                     if(document.querySelectorAll('.product-card').length === 0){
                         location.reload();
                     }
@@ -219,4 +215,83 @@ function checkTechUsername(){
             }
         }
     }
+}
+
+function updateOrderStatus(orderId) {
+    let selectBox = document.getElementById('status-select-' + orderId);
+    let newStatus = selectBox.value;
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.open('POST', '../controllers/orderController.php', true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    
+    xhttp.send('action=update_status&id=' + orderId + '&status=' + newStatus);
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            let response = JSON.parse(this.responseText);
+            
+            if (response.status === 'success') {
+                alert("Status updated successfully to " + newStatus + "!");
+                
+                let statusCell = document.getElementById('status-text-' + orderId);
+                statusCell.innerText = newStatus;
+                
+                statusCell.className = 'status-' + newStatus;
+            } else {
+                alert("Failed to update status: " + (response.message || "Unknown error"));
+            }
+        }
+    };
+}
+
+function updateCartQty(productId, inputElement) {
+    let newQty = inputElement.value;
+
+    if (newQty < 1) { newQty = 1; inputElement.value = 1; }
+    if (newQty > 5) { newQty = 5; inputElement.value = 5; alert("Max quantity is 5"); }
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.open('POST', '../controllers/cartController.php', true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send('action=update_qty_ajax&id=' + productId + '&qty=' + newQty);
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            let response = JSON.parse(this.responseText);
+            
+            if (response.status === 'success') {
+                document.getElementById('subtotal-' + productId).innerText = 'Tk ' + response.subtotal;
+                document.getElementById('grand-total').innerText = 'Tk ' + response.grandTotal;
+                document.getElementById('input-total-amount').value = response.grandTotal;
+            }
+        }
+    };
+}
+
+function removeCartItem(productId) {
+    if(!confirm("Remove this item from cart?")) return;
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.open('POST', '../controllers/cartController.php', true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send('action=remove_item_ajax&id=' + productId);
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            let response = JSON.parse(this.responseText);
+            
+            if (response.status === 'success') {
+                let row = document.getElementById('cart-row-' + productId);
+                if(row) row.remove();
+
+                document.getElementById('grand-total').innerText = 'Tk ' + response.grandTotal;
+                document.getElementById('input-total-amount').value = response.grandTotal;
+
+                if (response.isEmpty) {
+                    location.reload();
+                }
+            }
+        }
+    };
 }

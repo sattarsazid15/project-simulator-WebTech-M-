@@ -3,15 +3,18 @@ require_once('db.php');
 
 function addOrder($order){
     $con = getConnection();
+    $customerId = isset($order['customer_id']) ? $order['customer_id'] : 0;
+    $payMethod = isset($order['payment_method']) ? $order['payment_method'] : 'Cash on Delivery';
+
     $sql = "INSERT INTO orders (customer_id, customer_name, contact, address, total_amount, status, payment_method) 
             VALUES (
-                '{$order['customer_id']}', 
+                '{$customerId}', 
                 '{$order['customer_name']}', 
                 '{$order['contact']}', 
                 '{$order['address']}', 
                 '{$order['total_amount']}', 
                 '{$order['status']}', 
-                '{$order['payment_method']}'
+                '{$payMethod}'
             )";
     
     if(mysqli_query($con, $sql)){
@@ -46,8 +49,6 @@ function updateOrderStatus($id, $status){
     return mysqli_query($con, $sql);
 }
 
-//sazid
-
 function addOrderFeedback($orderId, $customerId, $feedback){
     $con = getConnection();
     $sql = "INSERT INTO order_feedback (order_id, customer_id, feedback)
@@ -70,6 +71,4 @@ function hasFeedback($orderId){
     $res = mysqli_query($con, $sql);
     return mysqli_num_rows($res) > 0;
 }
-
-
 ?>

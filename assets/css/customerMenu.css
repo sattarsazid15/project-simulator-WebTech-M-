@@ -75,7 +75,6 @@ body {
 
 #products-box h2 { margin-bottom: 15px; }
 
-
 .product-card {
     width: 220px;
     border: 1px solid #ccc;
@@ -110,14 +109,10 @@ body {
 }
 
 .product-card button:hover { background: #0056b3; }
-
 .product-price { color: #b12704; font-weight: bold; }
-
 .cart-form { margin-top: 5px; }
-
 .product-card .btn-cart { background: #28a745; color: white; }
 .product-card .btn-cart:hover { background: #218838; }
-
 
 .wishlist-btn {
     position: absolute;
@@ -127,7 +122,8 @@ body {
     border: none !important;
     font-size: 24px;
     cursor: pointer;
-    color: #ccc;
+    color: #555;
+    text-shadow: 0 0 2px #ffffff;
     padding: 0 !important;
     width: auto !important; 
 }
