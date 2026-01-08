@@ -2,6 +2,50 @@
 session_start();
 require_once('../models/productModel.php');
 
+if (isset($_GET['action']) && $_GET['action'] == 'get_product' && isset($_GET['id'])) {
+    $product = getProductById($_GET['id']);
+    echo json_encode($product);
+    exit;
+}
+
+if (isset($_GET['action']) && $_GET['action'] == 'search' && isset($_GET['value'])) {
+    $value = $_GET['value'];
+    $result = searchProducts($value);
+    $products = [];
+    while($row = mysqli_fetch_assoc($result)) {
+        $products[] = $row;
+    }
+    echo json_encode($products);
+    exit;
+}
+
+if (isset($_GET['action']) && $_GET['action'] == 'filter' && isset($_GET['value'])) {
+    $value = $_GET['value'];
+    if($value == 'all') {
+        $result = getAllProducts();
+    } else {
+        $result = getProductsByType($value);
+    }
+    $products = [];
+    while($row = mysqli_fetch_assoc($result)) {
+        $products[] = $row;
+    }
+    echo json_encode($products);
+    exit;
+}
+
+
+if (isset($_POST['action']) && $_POST['action'] == 'delete' && isset($_POST['id'])) {
+    $id = $_POST['id'];
+    if(deleteProduct($id)){
+        echo json_encode(['status' => 'success']);
+    } else {
+        echo json_encode(['status' => 'error']);
+    }
+    exit;
+}
+
+
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
     if(deleteProduct($id)){
@@ -118,6 +162,29 @@ if (isset($_POST['type'])) {
     }
 
 } else {
-    header("Location: ../views/adminDashboard.php");
+    
 }
+
+if (isset($_POST['action']) && $_POST['action'] == 'toggle_wishlist' && isset($_POST['id'])) {
+    if (!isset($_SESSION['customer'])) {
+        echo json_encode(['status' => 'unauthorized']);
+        exit;
+    }
+
+    $user_id = $_SESSION['customer']['id'];
+    $product_id = $_POST['id'];
+
+    if (isInWishlist($user_id, $product_id)) {
+        if (removeFromWishlist($user_id, $product_id)) {
+            echo json_encode(['status' => 'removed']);
+        }
+    } else {
+        if (addToWishlist($user_id, $product_id)) {
+            echo json_encode(['status' => 'added']);
+        }
+    }
+    exit;
+}
+
+
 ?>
