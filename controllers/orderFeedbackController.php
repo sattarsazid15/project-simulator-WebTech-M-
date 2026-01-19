@@ -26,3 +26,5 @@ if(isset($_POST['order_id'], $_POST['feedback'])){
         echo "<script>alert('Failed to submit feedback');</script>";
     }
 }
+
+?>

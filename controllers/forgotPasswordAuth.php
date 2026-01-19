@@ -19,3 +19,5 @@ if ($user) {
 } else {
     echo "Email not found!";
 }
+
+?>
