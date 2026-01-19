@@ -12,3 +12,5 @@ $user = getUserById($userId);
 
 echo json_encode($user);
 
+?>
+

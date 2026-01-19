@@ -16,3 +16,5 @@ if(isset($_POST['username'])){
         echo "username_available";
     }
 }
+
+?>

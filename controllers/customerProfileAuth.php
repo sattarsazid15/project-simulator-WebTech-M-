@@ -39,3 +39,4 @@ if(isset($_POST['change_password'])){
     }
     exit;
 }
+?>
