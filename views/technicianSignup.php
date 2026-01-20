@@ -66,6 +66,5 @@
         Already registered? <a href="technicianLogin.php">Login</a>
     </div>
 </div>
-
 </body>
 </html>

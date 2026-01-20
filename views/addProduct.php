@@ -58,6 +58,5 @@ if(!isset($_SESSION['admin']) && !isset($_COOKIE['admin_status'])){
         <a href="adminDashboard.php" id="back-link">Back to Dashboard</a>
     </div>
 </div>
-
 </body>
 </html>

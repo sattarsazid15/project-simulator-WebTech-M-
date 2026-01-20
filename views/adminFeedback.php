@@ -64,6 +64,5 @@ $feedbacks = getAllFeedbacks();
         </div>
     </div>
 </div>
-
 </body>
 </html>

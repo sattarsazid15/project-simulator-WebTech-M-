@@ -31,7 +31,7 @@ function fetchProductDetails() {
     if (!id) return;
 
     let xhttp = new XMLHttpRequest();
-    xhttp.open('GET', '../controllers/productController.php?action=get_product&id=' + id, true); // Updated URL
+    xhttp.open('GET', '../controllers/productController.php?action=get_product&id=' + id, true);
     xhttp.send();
 
     xhttp.onreadystatechange = function() {
@@ -65,7 +65,7 @@ function filterProducts() {
 
 function loadProducts(action, value) {
     let xhttp = new XMLHttpRequest();
-    xhttp.open('GET', '../controllers/productController.php?action=' + action + '&value=' + value, true); // Updated URL
+    xhttp.open('GET', '../controllers/productController.php?action=' + action + '&value=' + value, true);
     xhttp.send();
 
     xhttp.onreadystatechange = function() {

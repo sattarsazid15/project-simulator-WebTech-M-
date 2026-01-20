@@ -6,8 +6,6 @@ if(!isset($_SESSION['customer']) && !isset($_COOKIE['status'])){
     header("Location: customerLogin.php");
     exit;
 }
-
-
 ?>
 
 <?php
@@ -70,13 +68,11 @@ window.onload = function () {
 
         <div class="form-group">
             <label for="username">Username</label>
-            <!--input type="text" name="username" id="username" value="<?//= $currentUser['username'] ?>"-->
             <input type="text" name="username" id="username">
         </div>
 
         <div class="form-group">
             <label for="email">Email</label>
-            <!-- input type="text" name="email" id="email" value="<?//= $currentUser['email'] ?>"-->
             <input type="text" name="email" id="email">
         </div>
 

@@ -63,6 +63,5 @@ $history = getCompletedRequestsByTechnician($_SESSION['technician']['id']);
     </div>
 
 </div>
-
 </body>
 </html>

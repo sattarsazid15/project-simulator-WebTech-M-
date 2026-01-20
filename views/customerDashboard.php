@@ -108,6 +108,5 @@ if(isset($_GET['search']) && !empty($_GET['search'])){
     </div>
 
 </div>
-
 </body>
 </html>

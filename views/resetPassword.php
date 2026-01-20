@@ -33,6 +33,5 @@ if (!isset($_SESSION['reset_email'])) {
         <button type="submit" id="update-btn">Update Password</button>
     </form>
 </div>
-
 </body>
 </html>

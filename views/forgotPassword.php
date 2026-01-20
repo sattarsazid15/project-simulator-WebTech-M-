@@ -24,6 +24,5 @@
         <a href="customerLogin.php">Back to Login</a>
     </div>
 </div>
-
 </body>
 </html>

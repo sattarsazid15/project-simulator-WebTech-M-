@@ -73,6 +73,5 @@ if(!isset($_SESSION['admin']) && !isset($_COOKIE['admin_status'])){
     </div>
 
 </div>
-
 </body>
 </html>

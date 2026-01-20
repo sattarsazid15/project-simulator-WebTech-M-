@@ -14,6 +14,7 @@ if(!isset($_GET['id'])) {
 
 $user = getUserById($_GET['id']);
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,6 +46,5 @@ $user = getUserById($_GET['id']);
         <a href="adminCustomers.php" id="cancel-link">Cancel</a>
     </div>
 </div>
-
 </body>
 </html>

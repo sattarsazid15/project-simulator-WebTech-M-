@@ -10,6 +10,7 @@ if(!isset($_GET['id'])){
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,6 +67,5 @@ if(!isset($_GET['id'])){
         <a href="productManagement.php" id="back-link">Back to Product List</a>
     </div>
 </div>
-
 </body>
 </html>
