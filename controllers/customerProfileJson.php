@@ -11,4 +11,10 @@ $userId = $_SESSION['customer']['id'];
 $user = getUserById($userId);
 
 echo json_encode($user);
+<<<<<<< HEAD
 ?>
+=======
+
+?>
+
+>>>>>>> 44b5411b9b2883641a8aa10033209170651b60cf
