@@ -136,6 +136,5 @@ $total_price = 0;
         <?php } ?>
     </div>
 </div>
-
 </body>
 </html>

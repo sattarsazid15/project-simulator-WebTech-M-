@@ -86,6 +86,5 @@ $result = getAllOrders();
     </div>
 
 </div>
-
 </body>
 </html>

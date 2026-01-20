@@ -68,6 +68,5 @@ $result = getAllProducts();
         </div>
     </div>
 </div>
-
 </body>
 </html>

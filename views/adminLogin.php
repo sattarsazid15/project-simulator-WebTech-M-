@@ -47,6 +47,5 @@ if(isset($_SESSION['technician']) || isset($_COOKIE['tech_status'])){
         </div>
     </form>
 </div>
-
 </body>
 </html>

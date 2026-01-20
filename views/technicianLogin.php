@@ -16,6 +16,7 @@ if(isset($_SESSION['customer']) || isset($_COOKIE['status'])){
     exit;
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,6 +49,5 @@ if(isset($_SESSION['customer']) || isset($_COOKIE['status'])){
         </div>
     </form>
 </div>
-
 </body>
 </html>

@@ -79,6 +79,5 @@ $my_orders = getOrdersByCustomer($_SESSION['customer']['id']);
     </div>
 
 </div>
-
 </body>
 </html>

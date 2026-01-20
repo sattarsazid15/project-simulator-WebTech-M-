@@ -70,6 +70,5 @@ $items = $order['items'];
         </div>
 
     </div>
-
 </body>
 </html>

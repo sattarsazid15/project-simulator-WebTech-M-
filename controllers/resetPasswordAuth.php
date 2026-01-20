@@ -16,3 +16,4 @@ if(updatePassword($email, $password)){
 } else {
     echo "Password update failed";
 }
+?>

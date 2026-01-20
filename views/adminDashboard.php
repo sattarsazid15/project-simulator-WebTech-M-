@@ -67,6 +67,5 @@ $earnings = getTotalEarnings();
     </div>
 
 </div>
-
 </body>
 </html>

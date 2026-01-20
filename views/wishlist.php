@@ -76,6 +76,5 @@ $result = getUserWishlist($user_id);
     </div>
 
 </div>
-
 </body>
 </html>

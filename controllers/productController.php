@@ -185,6 +185,4 @@ if (isset($_POST['action']) && $_POST['action'] == 'toggle_wishlist' && isset($_
     }
     exit;
 }
-
-
 ?>

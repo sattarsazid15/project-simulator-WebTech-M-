@@ -52,6 +52,5 @@ if(isset($_SESSION['technician']) || isset($_COOKIE['tech_status'])){
         <a href="../index.php">Back to Role Selection</a>
     </div>
 </div>
-
 </body>
 </html>

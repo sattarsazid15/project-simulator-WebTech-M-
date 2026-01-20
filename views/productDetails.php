@@ -63,6 +63,5 @@ if(!$product){
     </div>
 
 </div>
-
 </body>
 </html>

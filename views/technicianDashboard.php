@@ -110,6 +110,5 @@ $my_requests = getRequestsByTechnician($_SESSION['technician']['id']);
     </div>
 
 </div>
-
 </body>
 </html>

@@ -45,6 +45,5 @@ $orderId = $_GET['order_id'];
         <a href="orderStatus.php">Back</a>
     </div>
 </div>
-
 </body>
 </html>

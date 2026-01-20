@@ -89,6 +89,5 @@ if(!isset($_SESSION['technician']) && !isset($_COOKIE['tech_status'])){
         <a href="technicianDashboard.php">Back To Menu</a>
     </div>
 </div>
-
 </body>
 </html>

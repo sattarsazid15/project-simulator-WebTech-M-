@@ -38,6 +38,5 @@ if(!isset($_SESSION['customer']) && !isset($_COOKIE['status'])){
         <a href="customerDashboard.php" id="dashboard-link">Back to Dashboard</a>
     </div>
 </div>
-
 </body>
 </html>

@@ -14,6 +14,7 @@ if(!isset($_GET['id'])) {
 
 $tech = getTechnicianById($_GET['id']);
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,6 +75,5 @@ $tech = getTechnicianById($_GET['id']);
         <a href="adminTechnicians.php" id="cancel-link">Cancel</a>
     </div>
 </div>
-
 </body>
 </html>

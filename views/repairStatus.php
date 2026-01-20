@@ -65,6 +65,5 @@ $my_repairs = getRequestsByCustomer($_SESSION['customer']['id']);
     </div>
 
 </div>
-
 </body>
 </html>

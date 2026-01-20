@@ -78,11 +78,9 @@ if(isset($_GET['search']) && !empty($_GET['search'])){
 </div>
 
 <script>
-
-function loginAlert(){
+    function loginAlert(){
     alert("Please login first to add items to cart!");
 }
 </script>
-
 </body>
 </html>

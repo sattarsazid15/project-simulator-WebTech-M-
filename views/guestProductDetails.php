@@ -61,6 +61,5 @@ if(!$product){
     alert("Please login first to add items to cart!");
 }
 </script>
-
 </body>
 </html>
