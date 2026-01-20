@@ -39,8 +39,4 @@ if(isset($_POST['change_password'])){
     }
     exit;
 }
-<<<<<<< HEAD
 ?>
-=======
-?>
->>>>>>> 44b5411b9b2883641a8aa10033209170651b60cf
